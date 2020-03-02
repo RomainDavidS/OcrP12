@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<!---  début de th:fragment="siteContent" ----------------------------------------------------->
+<form th:fragment="content( title, action)" action="#" th:action="${ action }"  method="post"  class="needs-validation" >
+
+    <th:block th:insert="~{common/fragment/common :: titleH4( ${title } ) }"></th:block>
+
+
+    <th:block th:insert="~{common/fragment/common :: contentError }"></th:block>
+
+    <div class="my-3 p-1 bg-white rounded box-shadow offset-1">
+        <div class="row">
+            <div class="input-group col-md-4 mb-3">
+                <label for="name" class="input-group-text"  >Nom du site</label>
+                <input type="text" th:field="*{name}" class="form-control"  id="name" />
+            </div>
+            <div class="input-group col-md-3 mb-3">
+                <label for="codeZs" class="input-group-text" >Code ZS</label>
+                <input type="text" th:field="*{codeZs}" class="form-control"  id="codeZs" />
+            </div>
+        </div>
+
+        <h1 class="h6">Adresse du local</h1>
+        <div class="input-group row col-md-6 mb-3">
+            <label for="adressLocalComplement" class="input-group-text col-md-3" >Complément</label>
+            <input type="text" th:field="*{adressLocalComplement}" class="form-control"  id="adressLocalComplement" />
+        </div>
+        <div class="input-group row col-md-6 mb-3">
+            <label for="adressLocalAdress" class="input-group-text col-md-3" >Adresse</label>
+            <input type="text" th:field="*{adressLocalAdress}" class="form-control"  id="adressLocalAdress" />
+        </div>
+        <div class="input-group row col-md-6 mb-3">
+            <label for="adressLocalCommune" class="input-group-text col-md-3" >Commune</label>
+            <input type="text" th:field="*{adressLocalCommune}" class="form-control"  id="adressLocalCommune" />
+        </div>
+        <h1 class="h6">Adresse postal</h1>
+        <div class="input-group row col-md-6 mb-3">
+            <label for="adressPostaleComplement" class="input-group-text col-md-3" >Complément</label>
+            <input type="text" th:field="*{adressPostaleComplement}" class="form-control"  id="adressPostaleComplement" />
+        </div>
+        <div class="input-group row col-md-6 mb-3">
+            <label for="adressPostaleAdress" class="input-group-text col-md-3" >Adresse</label>
+            <input type="text" th:field="*{adressPostaleAdress}" class="form-control"  id="adressPostaleAdress" />
+        </div>
+        <div class="input-group row col-md-6 mb-3">
+            <label for="adressPostaleCommune" class="input-group-text col-md-3" >Commune</label>
+            <input type="text" th:field="*{adressPostaleCommune}" class="form-control"  id="adressPostaleCommune" />
+        </div>
+        <div class="input-group row col-md-4 mb-3">
+            <label class="input-group-text" >Entreprise</label>
+            <select class="custom-select" th:field="*{entreprise.id}" >
+                <option value="" >Choisir...</option>
+                <option th:each="e : ${entrepriseBeanList}"
+                        th:value="${e.id}" th:text="${e.name}"></option>
+            </select>
+        </div>
+        <div class="input-group row col-md-4 mb-3">
+            <label class="input-group-text" >Call Center</label>
+            <select class="custom-select" th:field="*{callCenter.id}" >
+                <option value="" >Choisir...</option>
+                <option th:each="c : ${callCenterBeanList}"
+                        th:value="${c.id}" th:text="${c.name}"></option>
+            </select>
+        </div>
+        <div class="form-group row col-md-4 mb-3">
+            <label class="col-sm-12 col-form-label">Publication</label>
+            <div class="custom-control custom-radio" th:each="tag : ${tagIsEnabled}">
+                <input type="radio" th:field="*{enabled}"  th:value="${tag.value}"  class="custom-control-input "   />
+                <label class="custom-control-label mr-3" th:for="${#ids.prev('enabled')}" th:text="${tag.text}"></label>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary m-2">Valider</button>
+</form>
+
+</body>
+</html>

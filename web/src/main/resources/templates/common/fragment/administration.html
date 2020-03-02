@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<!-- début de th:fragment="subMenuEmail" --------------------------------------------------->
+<th:block th:fragment="subMenuEmail">
+</th:block>
+<!------------------------------------- fin de th:fragment="subMenuEmail" ------------------>
+
+<!-- début de th:fragment="subMenuEntreprise" --------------------------------------------------->
+<th:block th:fragment="subMenuEntreprise">
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/entreprise/user/administration}" >
+                <span data-feather="file"></span>
+                Les utilisateurs
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/entreprise/typeSite/administration}">
+                <span data-feather="shopping-cart"></span>
+                Les types de site
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/entreprise/site/administration}">
+                <span data-feather="shopping-cart"></span>
+                Les sites
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/entreprise/fonction/administration}">
+                <span data-feather="shopping-cart"></span>
+                Les fonctions
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/entreprise/organization/administration}">
+                <span data-feather="shopping-cart"></span>
+                Le territoire
+            </a>
+        </li>
+    </ul>
+</th:block>
+<!------------------------------------- fin de th:fragment="subMenuEntreprise" ------------------>
+
+<!-- début de th:fragment="subMenuEpdr" --------------------------------------------------->
+<th:block th:fragment="subMenuEpdr">
+</th:block>
+<!------------------------------------- fin de th:fragment="subMenuEpdr" ------------------>
+
+<!-- début de th:fragment="subMenuEndicateur" --------------------------------------------------->
+<th:block th:fragment="subMenuIndicateur">
+</th:block>
+<!------------------------------------- fin de th:fragment="subMenuIndicateur" ------------------>
+
+<!-- début de th:fragment="subMenuMarche" --------------------------------------------------->
+<th:block th:fragment="subMenuMarche">
+    <ul class="nav flex-column">
+
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/marche/administration}" >
+                <span data-feather="file"></span>
+                Les marchés
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/typeMarche/administration}">
+                <span data-feather="shopping-cart"></span>
+                Les types de marchés
+            </a>
+        </li>
+    </ul>
+</th:block>
+<!------------------------------------- fin de th:fragment="subMenuMarche" ------------------>
+
+<!-- début de th:fragment="subMenuMenu" --------------------------------------------------->
+<th:block th:fragment="subMenuMenu">
+</th:block>
+<!------------------------------------- fin de th:fragment="subMenuMenu" ------------------>
+
+<!-- début de th:fragment="subMenuPrestataire" --------------------------------------------------->
+<th:block th:fragment="subMenuPrestataire">
+    <ul class="nav flex-column">
+
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/entreprise/administration}">
+                <span data-feather="home"></span>
+                Entreprise
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/sitePrestataire/administration}">
+                <span data-feather="home"></span>
+                Site prestataire
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/callCenter/administration}">
+                <span data-feather="home"></span>
+                Call center
+            </a>
+        </li>
+    </ul>
+</th:block>
+<!------------------------------------- fin de th:fragment="subMenuPrestataire" ------------------>
+
+<!-- début de th:fragment="subMenuQualite" --------------------------------------------------->
+<th:block th:fragment="subMenuQualite">
+</th:block>
+<!------------------------------------- fin de th:fragment="subMenuQualite" ------------------>
+
+<!-- début de th:fragment="subMenuSms" --------------------------------------------------->
+<th:block th:fragment="subMenuSms">
+</th:block>
+<!------------------------------------- fin de th:fragment="subMenuSms" ------------------>
+
+</body>
+</html>

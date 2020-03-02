@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<th:block th:fragment="uploadFile( title, fileName, typeUpload )">
+    <!-- début de div.row : ---------------->
+    <div class="row" >
+        <div class="col-md-8 mb-3">
+            <label th:text="${title}"></label>
+            <div class="input-group">
+                <th:block  th:insert="~{ :: uploadTypeFile( ${fileName},${typeUpload} )}"></th:block>
+            </div>
+        </div>
+    </div>
+    <!-------------------- fin de div.row : ---------------->
+</th:block  >
+
+<th:block th:fragment="uploadTypeFile( fileName, uploadName )">
+
+    <div class="input-group-prepend">
+        <span class="input-group-text badge-danger" th:id="${ uploadName + 'BadgePhoto'}" ><i class="fas fa-camera-retro"></i></span>
+        <button class="btn btn-outline-secondary uploadFileButton" type="submit"  th:id="${ uploadName + 'Button'}" >Télécharger</button>
+    </div>
+    <div class="custom-file">
+        <input type="file" name="file" class="custom-file-input uploadFile" th:id="${ uploadName }" lang="fr"  />
+        <th:block th:switch="${uploadName}" th:with="typeFile = ${T(p12.ocr.web.technical.enums.typefile.TypeFile)}">
+            <th:bock th:case="'uploadBulletin'">
+                <input type="hidden" class="form-control uploadId" th:field="*{idBulletin}" th:id="${ uploadName + 'Id'}"  />
+                <input type="hidden" class="form-control"  th:id="${ uploadName + 'TypeFile'}" th:value="${typeFile.QUALITE}"  />
+            </th:bock>
+
+            <th:block th:case="'uploadIdentityPhoto'">
+                <input type="hidden" class="form-control uploadId" th:field="*{idIdentityPhoto}" th:id="${ uploadName + 'Id'}"  />
+                <input type="hidden" class="form-control"  th:id="${ uploadName + 'TypeFile'}" th:value="${typeFile.IDENTITY_PHOTO}"  />
+
+            </th:block>
+
+            <th:block th:case="'uploadContract'">
+                <input type="hidden" class="form-control uploadId" th:field="*{idContract}" th:id="${ uploadName + 'Id'}"  />
+                <input type="hidden" class="form-control"  th:id="${ uploadName + 'TypeFile'}" th:value="${typeFile.CONTRACT_DOCUMENT}"  />
+            </th:block>
+
+            <th:block th:case="'uploadConfidential'">
+                <input type="hidden" class="form-control uploadId" th:field="*{idConfidential}" th:id="${ uploadName + 'Id'}"  />
+                <input type="hidden" class="form-control"  th:id="${ uploadName + 'TypeFile'}" th:value="${typeFile.CONTRACT_DOCUMENT}"  />
+            </th:block>
+
+            <th:block th:case="'uploadHabilitation'">
+                <input type="hidden" class="form-control uploadId" th:field="*{idHabilitation}" th:id="${ uploadName + 'Id'}"  />
+                <input type="hidden" class="form-control"  th:id="${ uploadName + 'TypeFile'}" th:value="${typeFile.CONTRACT_DOCUMENT}"  />
+            </th:block>
+
+            <th:block th:case="'uploadQualification'" >
+                <input type="hidden" class="form-control uploadId" th:field="*{idQualification}" th:id="${ uploadName + 'Id'}"  />
+                <input type="hidden" class="form-control"  th:id="${ uploadName + 'TypeFile'}" th:value="${typeFile.CONTRACT_DOCUMENT}"  />
+            </th:block>
+
+            <th:block th:case="'uploadIpsItst'">
+                <input type="hidden" class="form-control uploadId" th:field="*{idIpsItst}" th:id="${ uploadName + 'Id'}"  />
+                <input type="hidden" class="form-control"  th:id="${ uploadName + 'TypeFile'}" th:value="${typeFile.CONTRACT_DOCUMENT}"  />
+            </th:block>
+            <th:bock th:case="'uploadMV'">
+                <input type="hidden" class="form-control uploadId" th:field="*{id}" th:id="${ uploadName + 'Id'}"  />
+                <input type="hidden" class="form-control"  th:id="${ uploadName + 'TypeFile'}" th:value="${typeFile.EPDR_MV}"  />
+            </th:bock>
+
+        </th:block>
+        <label class="custom-file-label" th:id="${ uploadName + 'Label'}" th:for="${ uploadName }"  th:text="${fileName}" >Sélectionner un bulletin</label>
+    </div>
+
+</th:block>
+
+
+<th:block th:fragment="mainTitle( title, href)">
+    <div class="clearfix offset-2" >
+        <div role="alert" class="alert alert-primary float-left w-50 p-2 text-center" th:text="${title}" th:if="${title != null}" ></div>
+        <!---  début de th:fragment="navAdd" ----------------------------------------------------->
+        <a  class="btn btn-outline-success float-left ml-2" th:href="${href}"  ><i class="fas fa-plus-circle mx-2"></i> Ajout</a>
+        <!-----------------------------------------  fin de th:fragment="navAdd" ----------------->
+    </div>
+    <div class="clearfix offset-2 mt-3" >
+        <div class="alert alert-warning float-left w-50 p-2 text-center" th:if="${param.addSuccess}"> Votre ajout a été réalisé avec succès.</div>
+        <div class="alert alert-warning float-left w-50 p-2 text-center" th:if="${param.updateSuccess}">Votre modification a été réalisée avec succès.</div>
+        <div class="alert alert-warning float-left w-50 p-2 text-center" th:if="${param.deleteSuccess}">L'effacement a été réalisé avec succès.</div>
+        <div class="alert alert-danger float-left w-50 p-2 text-center" th:if="${param.addError}">Votre ajout a été réjeté.</div>
+        <div class="alert alert-danger float-left w-50 p-2 text-center" th:if="${param.updateError}">Votre modification a été rejetée.</div>
+    </div>
+</th:block>
+
+<div class="clearfix pb-2 pt-2 mt-0 mb-1" th:fragment="titleH4 ( title )" >
+    <div role="alert" class="alert alert-primary float-left w-100 p-2 text-center h4" th:text="${ title }" > &nbsp;</div>
+</div>
+
+<div th:fragment="contentError" class="row" >
+    <div class="offset-3 col-md-6">
+
+        <div class="error-message" th:if="${#fields.hasGlobalErrors()}" th:each="error : ${#fields.errors('global')}" th:text="${error}">
+            Erreur de validation
+        </div>
+        <div th:each="field :  ${fieldList}" class="d-flex flex-wrap">
+            <div class="alert alert-danger text-center mr-1" role="alert"
+                 th:each="error: ${#fields.errors( field.name )}" th:text="${error}">
+                Erreur de validation
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<th:block th:fragment="menuMarche">
+    <li class="nav-item dropdown" th:each="o : ${session.menuOrganization}" sec:authorize="isAuthenticated()" >
+        <a class="nav-link active" href="#" id="navbarDropdownMenuMarche-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        th:text="${o.name}" ></a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuMarche-1">
+            <li class="dropdown-submenu" th:each="g : ${o.menuGenderList}" >
+                <a class="dropdown-item" href="#" th:text="${g.name}">Pose C</a>
+                <ul class="dropdown-menu">
+                    <li th:each="m : ${g.simpleMenuMarcheList}" >
+                        <a class="dropdown-item"  th:href="${m.url}" th:text="${m.name}" ></a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</th:block>
+
+</body>
+</html>

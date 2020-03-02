@@ -1,0 +1,52 @@
+/* Doc CSS */
+
+/* Images */
+ .carousel {
+
+    width: 80%;
+    height: 500px;
+}
+
+.carouselImg {
+
+    width: 100%;
+    height: 500px;
+}
+
+.carousel{
+    margin-bottom: 10px;
+
+}
+
+.carousel-indicators li {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    text-indent: 0;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.5);
+    list-style-type: square;
+}
+.carousel-control-prev, .carousel-control-next{
+   /* background-color: #33363b ;*/
+
+}
+.carousel-control-prev-icon {
+   /*
+   background-image: url(/img/previous.png);
+   */
+    width: 32px;
+    height: 32px;
+}
+.carousel-control-next-icon {
+    /*
+    background-image: url(/img/next.png);*/
+    width: 32px;
+    height: 32px;
+}
+.carousel-indicators .active {
+    width: 16px;
+    height: 16px;
+    background-color: #f0f0f0;
+}

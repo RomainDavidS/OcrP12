@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr-FR"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+
+    <th:block th:insert="~{common/fragment/header :: header }"></th:block>
+
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Linky dans les Alpes</title>
+</head>
+
+<body  th:with="plugin = ${@plugin} ">
+    <th:block th:insert="~{common/fragment/menu :: mainMenu  }"></th:block>
+
+    <div class="container-fluid">
+        <div class="row">
+            <main role="main" class="col-md-12 ml-sm-auto  px-3">
+                <div layout:fragment="content" > </div>
+            </main>
+        </div>
+    </div>
+
+    <th:block th:insert="~{common/fragment/footer :: footer }"></th:block>
+
+    <th:block th:insert="~{common/fragment/footer :: javascript }"></th:block>
+
+
+
+</body>
+</html>

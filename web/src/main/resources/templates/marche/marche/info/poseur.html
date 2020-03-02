@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{layout-sub-menu}">
+
+<title>Information marché</title>
+</head>
+<body>
+<div layout:fragment="subMenu" class="sidebar-sticky">
+
+    <th:block th:insert="~{ marche/marche/fragment :: subMenuMarche  }"></th:block>
+
+
+</div>
+
+<div layout:fragment="content" th:with="plugin = ${@plugin}">
+    <h2 class="offset-1 text-muted" th:text="${'Marché - ' + marcheName }"></h2>
+
+    <th:block th:insert="~{ common/fragment/common :: mainTitle( ${titlePoseur} , '/marche/info/poseur/add/'+ ${idMarche} )  }"></th:block>
+
+    <!---  début de th:fragment="content" ----------------------------------------------------->
+    <div  >
+
+        <div  class="card my-1 col-11" >
+            <div class="card-body" >
+
+                <div class="container my-1 " >
+                    <div class="col-md-12">
+                        <table class="table table-striped table-responsive-md table-sm"
+                               id="tableEmployee"
+                               data-toggle="table"
+                               data-pagination="true">
+                            <thead>
+                            <tr>
+                                <th scope="col" data-field="employeeName" data-sortable="true" data-width="100" >Nom</th>
+                                <th scope="col" data-field="employeeSite" data-sortable="true" data-width="100" >Site</th>
+                                <th scope="col" data-field="employeeCellPhone" data-sortable="true" data-width="75">Tél. portable</th>
+                                <th scope="col" data-field="employeeStartDateContract" data-sortable="true" data-width="75" >Contrat</th>
+                                <th scope="col" data-field="employeeSignatureDateConfidential" data-sortable="true" data-width="75" >Eng. Confidentialité</th>
+                                <th scope="col" data-field="employeeSignatureDateHabilitation" data-sortable="true" data-width="75">Habilitation</th>
+                                <th scope="col" data-field="employeeSignatureDateQualification" data-sortable="true" data-width="75">Qualification</th>
+                                <th scope="col" data-field="employeeSignatureDateIpsItst" data-sortable="true" data-width="75">IPS / ITST</th>
+
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            <tr th:each="e : ${employeeBeanList}" >
+                                <td >
+                                    <a th:href="@{/marche/info/poseur/info/{id}/{idMarche}(id=${e.id},idMarche=${idMarche})}"
+                                       th:text="${e.firstName + ' ' + e.lastName}" class="nav-link"></a>
+                                </td>
+                                <td th:text="${siteName}" ></td>
+                                <td th:text="${e.cellPhone}"></td>
+                                <td th:text="${plugin.getDate( e.startDateContract ) }"></td>
+                                <td th:text="${plugin.getDate(e.signatureDateConfidential ) }"></td>
+                                <td th:text="${plugin.getDate(e.signatureDateHabilitation)}"></td>
+                                <td th:text="${plugin.getDate(e.signatureDateQualification)}"></td>
+                                <td th:text="${plugin.getDate(e.signatureDateIpsItst)}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------------------------------  fin de div.row : Description --------------------------->
+</div>
+
+</body>
+</html>

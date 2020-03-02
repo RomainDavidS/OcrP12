@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<nav  th:fragment="mainMenu" class="navbar navbar-expand-md navbar-light bg-light  fixed-top" role="navigation"  >
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarWebSite" aria-controls="navbarWebSite" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <a class="navbar-brand bg-light" href="#" >
+        <img th:src="@{/img/logo_deploiement.png}" th:href="@{/}" class="align-self-center mr-1" alt="Deploiement Linky" style="height: 50%; width: 50%;" />
+    </a>
+
+    <div class="collapse navbar-collapse" id="navbarWebSite">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/}">Accueil </a>
+            </li>
+
+            <th:block th:insert="~{ common/fragment/common :: menuMarche  }"></th:block>
+
+            <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                <a class="nav-link active" href="#" id="navbarDropdownMenuQualite" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Qualité
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuQualite">
+                    <li th:each="q : ${T(p12.ocr.web.technical.enums.typebulletin.TypeBulletin).values()}">
+                        <a class="dropdown-item" th:href="@{/qualite/bulletin/all/{typeBulletin}(typeBulletin=${q})}" th:text="${q.code}"></a>
+                    </li>
+                </ul>
+            </li>
+
+            <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                <a class="nav-link active" href="#" id="navbarDropdownMenuEpdr" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    EPDR
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuEpdr">
+                    <li><a class="dropdown-item" href="/managementVisuel/all">Management visuel</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link active" href="#" id="navbarDropdownMenuLienUtile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Liens utiles
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLienUtile">
+                    <li class="dropdown-submenu" >
+                        <a class="dropdown-item" href="#" >Liens Utiles 1</a>
+                        <ul class="dropdown-menu">
+                            <li>
+
+                                <a class="dropdown-item" th:href="#" target="_blank" >Application 1</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </li>
+            <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                <a class="nav-link active" href="#" id="navbarDropdownMenuAdmin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Administration
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuAdmin">
+                    <li><a class="dropdown-item" th:href="@{/entreprise/user/administration}">Fonctions Entreprise</a></li>
+                    <li><a class="dropdown-item" th:href="@{/marche/administration}">Fonctions Marché</a></li>
+                    <li><a class="dropdown-item" th:href="@{/entreprise/administration}">Fonctions Prestataire</a></li>
+
+                </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link active" href="#" id="navbarDropdownMenuUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i>
+                    <span class="text-muted mr-3" sec:authorize="isAuthenticated()" th:text="${session.currentUsername}" > </span>
+                </a>
+                <ul sec:authorize="isAuthenticated()" class="dropdown-menu" aria-labelledby="navbarDropdownMenuUser">
+                    <li><a class="dropdown-item" th:href="@{/logout}"><i class="fa fa-sign-out fa-fw"></i>Déconnexion</a></li>
+                </ul>
+                <ul sec:authorize="isAnonymous()" class="dropdown-menu" aria-labelledby="navbarDropdownMenuUser">
+                    <li><a class="dropdown-item" th:href="@{/login}"><i class="fa fa-sign-in fa-fw"></i>Connexion</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<nav th:fragment="subMenu" class="col-md-2 d-none d-md-block bg-light sidebar mt-4">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">
+                    <span data-feather="home"></span>
+                    Dashboard <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="file"></span>
+                    Orders
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="shopping-cart"></span>
+                    Products
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="users"></span>
+                    Customers
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="bar-chart-2"></span>
+                    Reports
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="layers"></span>
+                    Integrations
+                </a>
+            </li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Saved reports</span>
+            <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+                <span data-feather="plus-circle"></span>
+            </a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="file-text"></span>
+                    Current month
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="file-text"></span>
+                    Last quarter
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="file-text"></span>
+                    Social engagement
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="file-text"></span>
+                    Year-end sale
+                </a>
+            </li>
+        </ul>
+
+
+
+
+    </div>
+
+</nav>
+
+</body>
+</html>

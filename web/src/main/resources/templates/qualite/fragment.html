@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+
+<!---  début de th:fragment="siteContent" ----------------------------------------------------->
+<form th:fragment="content( title, action)" action="#" th:action="${ action }"  method="post"  class="needs-validation" >
+
+    <th:block th:insert="~{common/fragment/common :: titleH4( ${title } ) }"></th:block>
+
+
+    <th:block th:insert="~{common/fragment/common :: contentError }"></th:block>
+
+    <div class="my-3 p-1 bg-white rounded box-shadow offset-2">
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+                <label for="name">Nom du bulletin</label>
+                <input type="text" th:field="*{name}" class="form-control"  id="name"  />
+            </div>
+        </div>
+
+
+        <th:block th:insert="~{common/fragment/common :: uploadFile ('Téléchargement du bulletin',${fileNameBulletin},'uploadBulletin') }"></th:block>
+
+
+
+
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary m-2">Valider</button>
+</form>
+<!---  début de th:fragment="siteContent" ----------------------------------------------------->
+<form th:fragment="contentUpdate( title, action)" action="#" th:action="${ action }"  method="post"  class="needs-validation" >
+
+    <th:block th:insert="~{common/fragment/common :: titleH4( ${title } ) }"></th:block>
+
+
+    <th:block th:insert="~{common/fragment/common :: contentError }"></th:block>
+
+    <div class="my-3 p-1 bg-white rounded box-shadow offset-2">
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="name">Nom du bulletin</label>
+                <input type="text" th:field="*{name}" class="form-control"  id="name"  />
+                <a  class="nav-link" th:href="@{/downloadFile/{id}(id=${bulletinBean.idBulletin})}" >Télécharger le document</a>
+            </div>
+        </div>
+        <input type="hidden" th:field="*{typeBulletin}" class="form-control"  id="typeBulletin"  />
+        <input type="hidden" th:field="*{createDate}" class="form-control"  id="createDate"  />
+        <th:block th:insert="~{common/fragment/common :: uploadFile ('Téléchargement du bulletin',${fileNameBulletin},'uploadBulletin') }"></th:block>
+
+        <th:block  th:each="b, i : *{ portageList }" >
+            <hr>
+            <h5 class="mb-3" th:text="${'Date de portage du Marché ' + b.marcheQualite.name}"></h5>
+            <div class="row">
+                <div class="input-group mb-3 col-4">
+                    <input type="hidden"  class="form-control" th:field="*{portageList[__${i.index}__].id}"  />
+                    <input type="date"  class="form-control" th:field="*{portageList[__${i.index}__].portageDate}"  />
+                </div>
+            </div>
+
+
+        </th:block>
+
+
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary m-2">Valider</button>
+</form>
+
+</body>
+</html>

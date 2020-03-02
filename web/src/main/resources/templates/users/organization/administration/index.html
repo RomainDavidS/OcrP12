@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{layout-sub-menu}">
+
+<title>Administration des territoires Entreprise</title>
+</head>
+<body>
+<div layout:fragment="subMenu" class="sidebar-sticky">
+
+    <th:block th:insert="~{ common/fragment/administration :: subMenuEntreprise  }"></th:block>
+
+
+</div>
+
+<div layout:fragment="content">
+
+    <th:block th:insert="~{ common/fragment/common :: mainTitle( 'Liste des territoires Entreprise', '/entreprise/organization/add')  }"></th:block>
+
+
+    <!---  début de th:fragment="content" ----------------------------------------------------->
+    <div  >
+        <div class="alert alert-info text-center" role="alert" th:if="${  organizationBeanList.size() == 0}">
+            Aucun territoire Entreprise à afficher
+        </div>
+        <div  class="card my-1 offset-2  col-4" th:if="${ organizationBeanList.size() > 0}">
+            <div class="card-body" >
+
+                <div class="container my-1 " >
+                    <div class="col-md-12">
+                        <table class="table table-striped table-responsive-md table-sm"
+                               id="tableOrganization"
+                               data-toggle="table"
+                               data-pagination="true">
+                            <thead>
+                            <tr>
+                                <th scope="col" data-field="organizationId" data-sortable="true" data-width="30" >#</th>
+                                <th scope="col" data-field="organizationName" data-sortable="true" data-width="200">Territoire Entreprise</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            <tr th:each="o : ${organizationBeanList}" >
+                                <td th:text="${o.id}" class="text-center"  > &nbsp;</td>
+                                <td >
+                                    <a th:href="@{/entreprise/organization/edit/{id}(id=${o.id})}" th:text="${o.name}"  ></a>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

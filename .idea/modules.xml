@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/OcrP12.iml" filepath="$PROJECT_DIR$/.idea/OcrP12.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microservice-agence/agence.iml" filepath="$PROJECT_DIR$/microservice-agence/agence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/config/config.iml" filepath="$PROJECT_DIR$/config/config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/config-server/config-server.iml" filepath="$PROJECT_DIR$/config-server/config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microservice-files/files.iml" filepath="$PROJECT_DIR$/microservice-files/files.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microservice-marche/marche.iml" filepath="$PROJECT_DIR$/microservice-marche/marche.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microservice-prestataire/prestataire.iml" filepath="$PROJECT_DIR$/microservice-prestataire/prestataire.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microservice-qualite/qualite.iml" filepath="$PROJECT_DIR$/microservice-qualite/qualite.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microservice-users/users.iml" filepath="$PROJECT_DIR$/microservice-users/users.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/web.iml" filepath="$PROJECT_DIR$/web/web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zuul-server/zuul-server.iml" filepath="$PROJECT_DIR$/zuul-server/zuul-server.iml" />
+    </modules>
+  </component>
+</project>

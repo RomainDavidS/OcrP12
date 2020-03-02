@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{layout-sub-menu}">
+
+<title>Administration des types de marchés</title>
+</head>
+<body>
+<div layout:fragment="subMenu" class="sidebar-sticky">
+
+    <th:block th:insert="~{ common/fragment/administration :: subMenuMarche  }"></th:block>
+
+
+</div>
+
+<div layout:fragment="content">
+
+    <th:block th:insert="~{ common/fragment/common :: mainTitle( 'Liste des types de marché', '/typeMarche/add')  }"></th:block>
+
+    <!---  début de th:fragment="content" ----------------------------------------------------->
+    <div  >
+        <div class="alert alert-info text-center" role="alert" th:if="${  typeMarcheBeanList.size() == 0}">
+            Aucun type de marché à afficher
+        </div>
+        <div  class="card my-1 offset-2  col-5" th:if="${ typeMarcheBeanList.size() > 0}">
+            <div class="card-body" >
+
+                <div class="container my-1 " >
+                    <div class="col-md-12">
+                        <table class="table table-striped table-responsive-md table-sm"
+                               id="tableTypeMarche"
+                               data-toggle="table"
+                               data-pagination="true">
+                            <thead>
+                            <tr>
+                                <th scope="col" data-field="typeMarcheId" data-sortable="true" data-width="30" >#</th>
+                                <th scope="col" data-field="typeMarcheName" data-sortable="true" data-width="200">Type de marché</th>
+                                <th scope="col" data-field="typeMarcheStatus" data-sortable="true" data-width="50" >Genre de marché</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            <tr th:each="t : ${typeMarcheBeanList}" >
+                                <td th:text="${t.id}" class="text-center"  > &nbsp;</td>
+                                <td >
+                                    <a th:href="@{/typeMarche/edit/{id}(id=${t.id})}" th:text="${t.name}"  ></a>
+                                </td>
+                                <td th:text="${t.gender.code}" > </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------------------------------  fin de div.row : Description --------------------------->
+
+
+</div>
+
+</body>
+</html>

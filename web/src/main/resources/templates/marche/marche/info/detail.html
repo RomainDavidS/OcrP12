@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr-FR"
+        xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{layout-sub-menu}">
+
+<title>Information marché</title>
+</head>
+<body>
+<div layout:fragment="subMenu" class="sidebar-sticky">
+
+    <th:block th:insert="~{ marche/marche/fragment :: subMenuMarche  }"></th:block>
+
+
+</div>
+
+<div layout:fragment="content"
+     th:with="marche = ${marcheBean}, site = ${sitePrestataireBean},
+     prestataire = ${prestataire}, sousTraitant = ${sousTraitant}" >
+    <th:block th:insert="~{marche/marche/fragment :: infoHeader  }"></th:block>
+
+    <th:block th:insert="~{marche/marche/fragment :: infoOffice  }"></th:block>
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<div th:fragment="carousel" id="carouselCaptions" class="carousel slide" data-ride="carousel" data-interval="5000" th:with="photoList = ${session.managementVisuel}">
+    <ol  class="carousel-indicators">
+        <li data-target="#carouselCaptions" th:attrappend="data-slide-to=${iter.index}"  th:each="p, iter:${photoList}" th:if="${ p.publication == true }" th:classappend="${iter.index == 0}?active"  ></li>
+
+    </ol>
+    <div class="carousel-inner">
+
+        <div class="carousel-item"  th:each="p, iter:${photoList}" th:classappend="${iter.index == 0}?active" th:if="${ p.publication == true }">
+            <img th:src="${'downloadFile/' + p.id}" class="d-block w-100" th:alt="${p.name}" th:class="carouselImg" />
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselCaptions" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Pécédant</span>
+    </a>
+
+    <a class="carousel-control-next" href="#carouselCaptions" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Suivant</span>
+    </a>
+</div>
+
+
+
+
+</body>
+</html>

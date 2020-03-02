@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="web" />
+        <module name="eureka-server" />
+        <module name="config-server" />
+        <module name="qualite" />
+        <module name="marche" />
+        <module name="users" />
+        <module name="files" />
+        <module name="zuul-server" />
+        <module name="prestataire" />
+        <module name="agence" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="agence" target="13" />
+      <module name="config-server" target="13" />
+      <module name="email" target="13" />
+      <module name="eureka-server" target="13" />
+      <module name="files" target="13" />
+      <module name="indicateur" target="13" />
+      <module name="marche" target="13" />
+      <module name="menu" target="13" />
+      <module name="prestataire" target="13" />
+      <module name="qualite" target="13" />
+      <module name="sms" target="13" />
+      <module name="users" target="13" />
+      <module name="web" target="13" />
+      <module name="zuul-server" target="13" />
+      <module name="zuul-server (1) (enedis.linky.alpes)" target="13" />
+      <module name="zuul-server (2) (com.library)" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="agence" options="-parameters" />
+      <module name="config-server" options="-parameters" />
+      <module name="email" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
+      <module name="files" options="-parameters" />
+      <module name="indicateur" options="-parameters" />
+      <module name="marche" options="-parameters" />
+      <module name="menu" options="-parameters" />
+      <module name="prestataire" options="-parameters" />
+      <module name="qualite" options="-parameters" />
+      <module name="sms" options="-parameters" />
+      <module name="users" options="-parameters" />
+      <module name="web" options="-parameters" />
+      <module name="zuul-server" options="-parameters" />
+      <module name="zuul-server (1) (enedis.linky.alpes)" options="-parameters" />
+      <module name="zuul-server (2) (com.library)" options="-parameters" />
+    </option>
+  </component>
+</project>

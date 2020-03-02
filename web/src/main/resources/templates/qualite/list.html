@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{layout}">
+
+<title>Les bulletins</title>
+</head>
+<body>
+
+<div layout:fragment="content" th:with="plg = ${ @plugin }">
+
+
+    <h2 class="offset-3 text-muted" th:text="${ typeBulletin.code }"></h2>
+
+    <th:block th:insert="~{ common/fragment/common :: mainTitle( null, '/qualite/add/' + ${ typeBulletin } )  }" ></th:block>
+
+
+
+    <!---  début de th:fragment="content" ----------------------------------------------------->
+    <div  >
+
+        <div  class="card my-1 col-11" >
+            <div class="card-body" >
+
+                <div class="container my-1 " >
+                    <div class="col-md-12">
+                        <table class="table table-striped table-responsive-md table-sm"
+                               id="tableBulletin"
+                               data-toggle="table"
+                               data-pagination="true">
+                            <thead>
+                                <tr>
+                                    <th scope="col" data-field="bulletin" data-sortable="true" >Nom du bulletin</th>
+                                    <th:block th:each="mQ : ${marcheQualiteBeanList}" >
+                                        <th scope="col"  th:attrappend="data-field=${'marcheQualite' + mQ.id}"  data-sortable="true" th:text="${mQ.name}" ></th>
+                                    </th:block>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr th:each="b : ${bulletinBeanList}" th:if="${b.typeBulletin == typeBulletin }" >
+                                    <td  class="text-center"  >
+                                        <a th:href="@{/qualite/edit/{id}(id=${b.id})}" th:text="${b.name}"  ></a>
+                                    </td>
+                                    <th:block th:each="mQ : ${marcheQualiteBeanList}" >
+                                        <th:block th:each="p : ${b.portageList}"  >
+                                            <td th:text="${plg.getDate(p.portageDate)}" th:if="${ p.marcheQualite.id == mQ.id   }" ></td>
+                                        </th:block>
+                                    </th:block>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------------------------------  fin de div.row : Description --------------------------->
+</div>
+
+</body>
+</html>

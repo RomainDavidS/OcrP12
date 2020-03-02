@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{layout-sub-menu}">
+
+<title>Information marché</title>
+</head>
+<body>
+<div layout:fragment="subMenu" class="sidebar-sticky">
+
+    <th:block th:insert="~{ marche/marche/fragment :: subMenuMarche  }"></th:block>
+
+
+</div>
+
+<div layout:fragment="content">
+    <th:block th:insert="~{ common/fragment/common :: mainTitle( 'Liste des marchés', '/marche/add')  }"></th:block>
+
+    <!---  début de th:fragment="content" ----------------------------------------------------->
+    <div  >
+        <div class="alert alert-info text-center" role="alert" th:if="${  marcheBeanList.size() == 0}">
+            Aucun marché à afficher
+        </div>
+        <div  class="card my-1 col-11" th:if="${ marcheBeanList.size() > 0}">
+            <div class="card-body" >
+
+                <div class="container my-1 " >
+                    <div class="col-md-12">
+                        <table class="table table-striped table-responsive-md table-sm"
+                               id="tableMarche"
+                               data-toggle="table"
+                               data-pagination="true">
+                            <thead>
+                            <tr>
+                                <th scope="col" data-field="marcheId" data-sortable="true" data-width="30" >#</th>
+                                <th scope="col" data-field="marcheName" data-sortable="true" >Nom du marché</th>
+                                <th scope="col" data-field="marcheNumber" data-sortable="true">Numéro</th>
+                                <th scope="col" data-field="prestataireName" data-sortable="true">Prestataire</th>
+                                <th scope="col" data-field="sousTraitant" data-sortable="true">Sous-Traitant</th>
+                                <th scope="col" data-field="dateDebut" data-sortable="true">Date de début</th>
+                                <th scope="col" data-field="dateFin" data-sortable="true">Date de fin</th>
+                                <th scope="col" data-field="dateClos" data-sortable="true">Date de clôture</th>
+                                <th scope="col" data-field="referent" data-sortable="true">Référent EPDR</th>
+
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            <tr th:each="m : ${marcheBeanList}" >
+                                <td th:text="${m.id}" class="text-center"  > &nbsp;</td>
+                                <td >
+                                    <a th:href="@{/marche/edit/{id}(id=${m.id})}" th:text="${m.name}" ></a>
+
+                                </td>
+                                <td th:text="${m.numero}"> </td>
+                                <td th:text="${plugin.entrepriseName( m.idPrestataire ) }"></td>
+                                <td th:text="${plugin.entrepriseName( m.idSousTraitant ) }"></td>
+                                <td th:text="${plugin.getDate( m.dateStart )}"></td>
+                                <td th:text="${plugin.getDate( m.dateEnd )}"></td>
+                                <td th:text="${plugin.getDate( m.dateClosed )}"></td>
+                                <td th:text="${plugin.userEntrepriseFullName(m.idRef1 ) }"></td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------------------------------  fin de div.row : Description --------------------------->
+</div>
+
+</body>
+</html>

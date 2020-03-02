@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="fr-FR"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<!---  début de th:fragment="siteContent" ----------------------------------------------------->
+<form th:fragment="contentOffice( title, action)" action="#" th:action="${ action }"  method="post"  class="needs-validation" >
+    <th:block th:insert="~{common/fragment/common :: titleH4( ${title } ) }"></th:block>
+
+
+    <th:block th:insert="~{common/fragment/common :: contentError }"></th:block>
+
+    <div class="offset-1 col-10 my-1 p-1 bg-white rounded box-shadow">
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="rhName">Nom</label>
+                <input type="text" th:field="*{rhName}" class="form-control"  id="rhName" placeholder="Saisir un nom" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="fonction">Fonction</label>
+                <input type="text" th:field="*{fonction}" class="form-control"  id="fonction" placeholder="Saisir une fonction"  />
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="officePhone">Tél. bureau</label>
+                <input type="tel" th:field="*{officePhone}" class="form-control"  id="officePhone" placeholder="Saisir un numéro de téléphone"  />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="cellPhone">Tél. portable</label>
+                <input type="tel" th:field="*{cellPhone}" class="form-control"  id="cellPhone" placeholder="Saisir un numéro de téléphone" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="email">eMail</label>
+                <input type="email" th:field="*{email}" class="form-control"  id="email" placeholder="Saisir une adresse mail" />
+            </div>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary m-2">Valider</button>
+</form>
+<!---  début de th:fragment="siteContent" ----------------------------------------------------->
+<form th:fragment="contentPoseur( title, action)" action="#" th:action="${ action }"  method="post"  class="needs-validation"  >
+    <th:block th:insert="~{common/fragment/common :: titleH4( ${title } ) }"></th:block>
+
+
+    <th:block th:insert="~{common/fragment/common :: contentError }"></th:block>
+
+    <div class="my-3 p-1 bg-white rounded box-shadow offset-1">
+        <h4 class="mb-3">Poseur</h4>
+        <th:block th:insert="~{common/fragment/common :: uploadFile ('Téléchargement de la photo d\'identité', ${fileNamePhoto},'uploadIdentityPhoto') }"></th:block>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="nni">Nni</label>
+                <div class="input-group">
+                    <input type="text" th:field="*{nni}" class="form-control"  id="nni" placeholder="Saisir un Nni" aria-label="Nni" aria-describedby="button-search-nni"  />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="firstName">Prénom</label>
+                <input type="text" th:field="*{firstName}" class="form-control"  id="firstName"  />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="lastName">Nom</label>
+                <input type="text" th:field="*{lastName}" class="form-control"  id="lastName"  />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 mb-3">
+                <label for="cellPhone">Tél. Portable</label>
+                <input type="text" th:field="*{cellPhone}" class="form-control"  id="cellPhone" />
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="officePhone">Tél. Bureau</label>
+                <input type="text" th:field="*{officePhone}" class="form-control"  id="officePhone" />
+            </div>
+            <div class="col-md-5 mb-3">
+                <label for="email">Email</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">@</span>
+                    </div>
+                    <input type="text" class="form-control" th:field="*{email}" id="email" placeholder="Email"  >
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <label >Publication</label>
+                <div class="custom-control custom-radio" th:each="tag : ${tagIsEnabled}">
+                    <input type="radio" th:field="*{enabled}"  th:value="${tag.value}"  class="custom-control-input"   />
+                    <label class="custom-control-label" th:for="${#ids.prev('enabled')}" th:text="${tag.text}"></label>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label >Nouveau poseur</label>
+                <div class="custom-control custom-radio" th:each="tag : ${tagIsNewPoseur}">
+                    <input type="radio" th:field="*{newEmployee}"  th:value="${tag.value}"  class="custom-control-input"  />
+                    <label class="custom-control-label" th:for="${#ids.prev('newEmployee')}" th:text="${tag.text}"></label>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h4 class="mb-3">Le contrat</h4>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <label for="startDateContract">Date de début</label>
+                <input type="date" th:field="*{startDateContract}" class="form-control"  id="startDateContract"  />
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="endDateContract">Date de fin</label>
+                <input type="date" th:field="*{endDateContract}" class="form-control"  id="endDateContract"  />
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="signatureDateContract">Date de signature</label>
+                <input type="date" th:field="*{signatureDateContract}" class="form-control"  id="signatureDateContract"  />
+            </div>
+        </div>
+        <th:block th:insert="~{common/fragment/common :: uploadFile ('Téléchargement du contrat', ${fileNameContract} ,'uploadContract') }"></th:block>
+
+        <hr>
+        <h4 class="mb-3">Engagement de confidentialité</h4>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <label for="startDateContract">Date de début</label>
+                <input type="date" th:field="*{startDateConfidential}" class="form-control"  id="startDateContract"  />
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="endDateContract">Date de fin</label>
+                <input type="date" th:field="*{endDateConfidential}" class="form-control"  id="endDateContract"  />
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="signatureDateContract">Date de signature</label>
+                <input type="date" th:field="*{signatureDateConfidential}" class="form-control"  id="signatureDateContract"  />
+            </div>
+        </div>
+        <th:block th:insert="~{common/fragment/common :: uploadFile ('Téléchargement de l\'engagement de confidentialité',${fileNameConfidential},'uploadConfidential') }"></th:block>
+
+        <hr>
+        <h4 class="mb-3">Titre d'habilitation</h4>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <label for="startDateHabilitation">Date de début</label>
+                <input type="date" th:field="*{startDateHabilitation}" class="form-control"  id="startDateHabilitation"  />
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="endDateHabilitation">Date de fin</label>
+                <input type="date" th:field="*{endDateHabilitation}" class="form-control"  id="endDateHabilitation"  />
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="signatureDateHabilitation">Date de signature</label>
+                <input type="date" th:field="*{signatureDateHabilitation}" class="form-control"  id="signatureDateHabilitation"  />
+            </div>
+        </div>
+        <th:block th:insert="~{common/fragment/common :: uploadFile ('Téléchargement du titre d\'habilitation',${fileNameHabilitation},'uploadHabilitation') }"></th:block>
+
+        <hr>
+        <h4 class="mb-3">Titre de qualification</h4>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <label for="startDateQualification">Date de début</label>
+                <input type="date" th:field="*{startDateQualification}" class="form-control"  id="startDateQualification"  />
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="endDateQualification">Date de fin</label>
+                <input type="date" th:field="*{endDateQualification}" class="form-control"  id="endDateQualification"  />
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="signatureDateQualification">Date de signature</label>
+                <input type="date" th:field="*{signatureDateQualification}" class="form-control"  id="signatureDateQualification"  />
+            </div>
+        </div>
+        <th:block th:insert="~{common/fragment/common :: uploadFile ('Téléchargement du titre de qualification',${fileNameQualification},'uploadQualification') }"></th:block>
+
+        <hr>
+        <h4 class="mb-3">IPS - ITST</h4>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <label for="startDateIpsItst">Date de début</label>
+                <input type="date" th:field="*{startDateIpsItst}" class="form-control"  id="startDateIpsItst"  />
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="endDateIpsItst">Date de fin</label>
+                <input type="date" th:field="*{endDateIpsItst}" class="form-control"  id="endDateIpsItst"  />
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="signatureDateIpsItst">Date de signature</label>
+                <input type="date" th:field="*{signatureDateIpsItst}" class="form-control"  id="signatureDateIpsItst"  />
+            </div>
+        </div>
+        <th:block th:insert="~{common/fragment/common :: uploadFile ('Téléchargement de l\'IPS-TST',${fileNameIpsItst},'uploadIpsItst') }"></th:block>
+
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary m-2">Valider</button>
+</form>
+
+<!---  début de th:fragment="infoHeader" ----------------------------------------------------->
+<div th:fragment="infoPoseur" th:with="plugin = ${@plugin}" >
+
+    <div class="clearfix" >
+        <a  class="btn btn-outline-info float-left ml-2" th:href="@{/marche/info/poseur/edit/{id}/{idMarche}(id=${e.id},idMarche=${idMarche})}"  >
+            <i class="fas fa-plus-circle mx-2"></i> Modifier</a>
+    </div>
+
+    <!---  début de div.media ----------------------------------------------------->
+    <div class="media w-50 offset-2 mr-2" >
+        <div class="w-50 media-body">
+            <img th:if="${e.idIdentityPhoto != '' }" class="w-75 align-self-center ml-3 photoIdentitySize mb-1" th:src="${'/downloadFile/' + e.idIdentityPhoto}"  th:alt="${'Photo de ' + e.firstName + ' ' + e.lastName }" />
+            <img th:if="${e.idIdentityPhoto == '' }" class="w-75 align-self-center ml-3 photoIdentitySize mb-1" th:src="@{/img/no-image.png }"  th:alt="${'Aucune photo'}" />
+        </div>
+        <!---  début de div.media-body ----------------------------------------------------->
+        <div class="w-50 media-body">
+            <span class="badge badge-pill badge-success mb-1" th:if="${e.endDateContract == null }">Actif</span>
+            <span class="badge badge-pill badge-danger mb-1" th:if="${e.endDateContract != null }">Inactif</span>
+            <span class="badge badge-pill badge-info mb-1" th:if="${ e.newEmployee }">Nouveau poseur</span>
+
+
+            <th:block th:insert="~{ :: mediaContent( 'Nom / Nni', ${e.firstName + ' ' + e.lastName + ' / ' + e.nni} )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContent( 'Tél. portable / Tél. burreau / eMail', ${e.cellPhone + ' / ' + e.officePhone + ' / ' + e.email } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContent( 'Marché / Entreprise', ${m.name} + ' / ' + ${ e.entreprise.name } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContent( 'Site', ${s.name} )}"></th:block>
+
+        </div>
+        <!-------------------------------  fin de div.media-body --------------------------->
+    </div>
+    <!-------------------------------  fin de div.media --------------------------->
+    <div class="media w-75 offset-1" >
+        <div class="w-25 media-body mr-2">
+            <h5 class="mt-4 mb-1">Contrat</h5>
+            <th:block th:insert="~{ :: mediaContent( 'Date début de contrat', ${ plugin.getDate( e.startDateContract ) } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContent( 'Date fin de contrat', ${ plugin.getDate( e.endDateContract ) } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContent( 'Date de signature de contrat', ${plugin.getDate( e.signatureDateContract ) } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContentA( 'Le contrat', ${ e.idContract } )}"></th:block>
+
+            <h5 class="mt-4 mb-1">Engagement de confidentialité</h5>
+            <th:block th:insert="~{ :: mediaContent( 'Date début engagement de confidentialité', ${ plugin.getDate(e.startDateConfidential ) } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContent( 'Date fin engagement de confidentialité', ${ plugin.getDate(e.endDateConfidential ) } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContent( 'Date de signature engagement de confidentialité', ${ plugin.getDate(e.signatureDateConfidential ) } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContentA( 'L\'engagement de confidentialité', ${ e.idConfidential } )}"></th:block>
+
+        </div>
+        <div class="w-25 media-body mr-2">
+            <h5 class="mt-4 mb-1">Titre d'habilitation</h5>
+            <th:block th:insert="~{ :: mediaContent( 'Date début d\'habilitation', ${ plugin.getDate( e.startDateHabilitation ) } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContent( 'Date fin d\'habilitation', ${ plugin.getDate( e.endDateHabilitation ) } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContent( 'Date de signature de l\'habilitation', ${plugin.getDate( e.signatureDateContract ) } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContentA( 'Le titre d\'habilitation', ${ e.idHabilitation } )}"></th:block>
+
+            <h5 class="mt-4 mb-1">Titre de qualification</h5>
+            <th:block th:insert="~{ :: mediaContent( 'Date début de qualification', ${ plugin.getDate( e.startDateQualification ) } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContent( 'Date fin de qualification', ${ plugin.getDate( e.endDateQualification ) } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContent( 'Date de signature de qualification', ${ plugin.getDate( e.signatureDateQualification ) } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContentA( 'Le titre de qualification', ${ e.idQualification } )}"></th:block>
+
+        </div>
+        <div class="w-25 media-body mr-2">
+            <h5 class="mt-4 mb-1">IPS - ITST</h5>
+            <th:block th:insert="~{ :: mediaContent( 'Date début de l\' IPS-ITST', ${ plugin.getDate( e.startDateIpsItst ) } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContent( 'Date fin de l\' IPS-ITST', ${ plugin.getDate( e.endDateIpsItst ) } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContent( 'Date de signature de l\' IPS-ITST', ${ plugin.getDate( e.signatureDateIpsItst ) } )}"></th:block>
+
+            <th:block th:insert="~{ :: mediaContentA( 'L\' IPS-ITST', ${ e.idIpsItst } )}"></th:block>
+
+        </div>
+    </div>
+
+</div>
+<!-------------------------------  fin de th:fragment="infoHeader" --------------------------->
+
+<th:block th:fragment="mediaContent( title, info )">
+    <div class="media text-muted pt-3">
+        <img th:src="@{/img/voies.png}" alt="" class="mr-2 rounded bg-dark"/>
+        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <strong class="d-block text-gray-dark" th:text="${ title }"></strong>
+            <span class="text-muted"  th:text="${ info }"></span>
+        </p>
+    </div>
+</th:block >
+
+<th:block th:fragment="mediaContentA( title, idDocument )">
+    <div class="media text-muted pt-3">
+        <img th:src="@{/img/voies.png}" alt="" class="mr-2 rounded bg-dark"/>
+        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <strong class="d-block text-gray-dark" th:text="${ title }" ></strong>
+            <a th:if="${ idDocument != ''}" class="nav-link" th:href="@{/downloadFile/{id}(id=${idDocument})}" >Télécharger le document</a>
+        </p>
+    </div>
+</th:block>
+
+<!---  début de th:fragment="siteContent" ----------------------------------------------------->
+<form th:fragment="contentIndemnisation( title, action)" action="#" th:action="${ action }"  method="post"  class="needs-validation" >
+
+    <th:block th:insert="~{common/fragment/common :: titleH4( ${title } ) }"></th:block>
+
+
+    <th:block th:insert="~{common/fragment/common :: contentError }"></th:block>
+
+    <div class="offset-1 col-10 my-1 p-1 bg-white rounded box-shadow">
+
+        <div class="row">
+            <div class="input-group col-md-4 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" >Status de la demande</label>
+                </div>
+                <select class="custom-select" th:field="*{status}" >
+                    <option value="" >Choisir...</option>
+                    <option th:each="s : ${T(p12.ocr.web.technical.enums.indemnisation.IndemnisationStatus).values()}"
+                            th:value="${s}" th:text="${s.code}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="pdl">PDL</label>
+                <input type="text" th:field="*{pdl}" class="form-control"  id="pdl" placeholder="Saisir un PDL"  />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="numero">Nom du client</label>
+                <input type="text" th:field="*{clientName}" class="form-control"  id="numero"  />
+            </div>
+
+        </div>
+        <h4 class="mb-3">Réclamation</h4>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="amount">Montant de la réclamation</label>
+                <input type="text" th:field="*{amount}" class="form-control"  id="amount" placeholder="Saisir le montant de la réclamation"  />
+            </div>
+            <div class="col-md-10 mb-3">
+                <label for="reclamation">Détail de la réclamation</label>
+                <textarea class="form-control" th:field="*{reclamation}" id="reclamation" ></textarea>
+            </div>
+            <div class="col-md-10 mb-3">
+                <label for="entrepriseComment">Commentaire Entreprise</label>
+                <textarea class="form-control" th:field="*{entrepriseComment}" id="entrepriseComment" ></textarea>
+            </div>
+        </div>
+
+        <h4 class="mb-3">Dates</h4>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="reclamationDate">Date de réclamation</label>
+                <input type="date" th:field="*{reclamationDate}" class="form-control"  id="reclamationDate" />
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="closedDate">Clôture de la réclamation</label>
+                <input type="date" th:field="*{closedDate}" class="form-control"  id="closedDate" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="sendEdpDate">Envoie EDP</label>
+                <input type="date" th:field="*{sendEdpDate}" class="form-control"  id="sendEdpDate" />
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="returnEdpDate">Retour EDP</label>
+                <input type="date" th:field="*{returnEdpDate}" class="form-control"  id="returnEdpDate" />
+            </div>
+            <div class="col-md-10 mb-3">
+                <label for="edpComment">Commentaire de l'EDP</label>
+                <textarea class="form-control" th:field="*{edpComment}" id="edpComment" ></textarea>
+            </div>
+            <div class="col-md-10 mb-3">
+                <label for="action">Traitement</label>
+                <textarea class="form-control" th:field="*{action}" id="action" ></textarea>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary m-2">Valider</button>
+</form>
+
+<!---  début de th:fragment="infoOffice" ----------------------------------------------------->
+<div th:fragment="infoOffice" >
+    <th:block th:insert="~{ common/fragment/common :: mainTitle( 'Ressources humaines', '/marche/info/office/add/'+ ${idMarche} + '/'+ ${idSitePrestataire} )  }"></th:block>
+
+    <!---  début de th:fragment="content" ----------------------------------------------------->
+    <div  >
+        <div class="offset-2 alert alert-info text-center col-4" role="alert" th:if="${ sitePrestataireBean.siteOfficeList.size() == 0}">
+            Aucune ressource humaine à afficher
+        </div>
+        <div  class="offset-1 card my-1 col-10" th:if="${sitePrestataireBean.siteOfficeList.size() > 0}">
+            <div class="card-body" >
+
+                <div class="container my-1 " >
+                    <div class="col-md-12">
+                        <table class="table table-striped table-responsive-md table-sm"
+                               id="tableOffice"
+                               data-toggle="table"
+                               data-pagination="true">
+                            <thead>
+                            <tr>
+                                <th scope="col" data-field="officeFonction" data-sortable="true" data-width="150" >Fontion</th>
+                                <th scope="col" data-field="officeMember" data-sortable="true" data-width="150" >Nom</th>
+                                <th scope="col" data-field="officeMemberPhoneOffice" data-sortable="true" data-width="50"  >Tél. Bureau</th>
+                                <th scope="col" data-field="officeMemberPhonePortable" data-sortable="true" data-width="50" >Tél. Portable</th>
+                                <th scope="col" data-field="officeMemberMail" data-sortable="true" data-width="150" >Mail</th>
+                                <th scope="col" data-field="officeMemberAction" data-sortable="true" data-width="150" >&nbsp;</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            <tr th:each="s : ${sitePrestataireBean.siteOfficeList}" >
+                                <td th:text="${s.fonction}"></td>
+                                <td >
+                                    <a th:href="@{/marche/info/office/edit/{id}/{idMarche}/{idSitePrestataire}(id=${s.id},idMarche=${idMarche},idSitePrestataire=${idSitePrestataire})}"
+                                       th:text="${s.rhName}" class="nav-link"></a>
+                                </td>
+                                <td th:text="${s.officePhone}"></td>
+                                <td th:text="${s.cellPhone}"></td>
+                                <td th:text="${s.email}"></td>
+                                <td>
+                                    <a th:href="@{/marche/info/office/delete/{id}/{idMarche}/{idSitePrestataire}(id=${s.id},idMarche=${idMarche},idSitePrestataire=${idSitePrestataire})}"
+                                       class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-minus-circle mx-2"></i></i>Supprimer</a>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-------------------------------  fin de th:fragment="infoHeader" --------------------------->
+<!---  début de th:fragment="infoHeader" ----------------------------------------------------->
+<div th:fragment="infoHeader" >
+    <h2 class="offset-1 text-muted" th:text="${'Marché - ' + marche.name }"></h2>
+
+    <!---  début de div.media ----------------------------------------------------->
+    <div class="offset-2 w-50 media" >
+        <!---  début de div.media-body ----------------------------------------------------->
+        <div class="w-50 media-body">
+            <!---  début de div.media text-muted : Cotation ----------------------------------------------------->
+            <div class="media text-muted pt-3">
+                <img th:src="@{/img/cotation.png}" alt="" class="mr-2 rounded bg-dark"/>
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark">Titulaire du marché</strong>
+                    <span th:text="${prestataire.name}"></span>
+                </p>
+
+            </div>
+            <!-------------------------------  fin de div.media text-muted : Cotation --------------------------->
+
+            <!---  début de div.media text-muted : Cotation ----------------------------------------------------->
+            <div class="media text-muted pt-3" th:if="${sousTraitant}">
+                <img th:src="@{/img/cotation.png}" alt="" class="mr-2 rounded bg-dark"/>
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark">Sous traitant</strong>
+                    <span th:text="${sousTraitant.name}"></span>
+                </p>
+            </div>
+            <!-------------------------------  fin de div.media text-muted : Cotation --------------------------->
+            <!---  début de div.media text-muted : Cotation ----------------------------------------------------->
+            <div class="media text-muted pt-3" >
+                <img th:src="@{/img/cotation.png}" alt="" class="mr-2 rounded bg-dark"/>
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark">Adresse du site</strong>
+                    <span th:text="${site.adressLocalComplement + ' '+ site.adressLocalAdress + ' ' + site.adressLocalCommune}"></span>
+                </p>
+            </div>
+            <!-------------------------------  fin de div.media text-muted : Cotation --------------------------->
+            <!---  début de div.media text-muted : Cotation ----------------------------------------------------->
+            <div class="media text-muted pt-3" >
+                <img th:src="@{/img/cotation.png}" alt="" class="mr-2 rounded bg-dark"/>
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark">Adresse postale</strong>
+                    <span th:text="${site.adressPostaleComplement + ' ' + site.adressPostaleAdress + ' ' + site.adressPostaleCommune}"></span>
+                </p>
+            </div>
+            <!-------------------------------  fin de div.media text-muted : Cotation --------------------------->
+            <!---  début de div.media text-muted : Hauteur ----------------------------------------------------->
+            <div class="media text-muted pt-3">
+                <img th:src="@{/img/hauteur.png}" alt="" class="mr-2 rounded bg-dark"/>
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark">Siret / Code ZS</strong>
+                    <span th:text="${prestataire.siret + ' / ' + site.codeZs}"></span>
+                </p>
+            </div>
+            <!-------------------------------  fin de div.media text-muted : Hauteur --------------------------->
+
+
+        </div>
+        <!-------------------------------  fin de div.media-body --------------------------->
+
+
+        <!---  début de div.media-body ----------------------------------------------------->
+        <div class="w-50 media-body">
+            <!---  début de div.media text-muted : Hauteur ----------------------------------------------------->
+            <div class="media text-muted pt-3">
+                <img th:src="@{/img/hauteur.png}" alt="" class="mr-2 rounded bg-dark"/>
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark">Marché / type de marché</strong>
+                    <span th:text="${marche.name + ' / ' + marche.typeMarche.name}"></span>
+                </p>
+            </div>
+            <!-------------------------------  fin de div.media text-muted : Hauteur --------------------------->
+
+            <!---  début de div.media text-muted : Type----------------------------------------------------->
+            <div class="media text-muted pt-3">
+                <img th:src="@{/img/type.png}" alt="" class="mr-2 rounded bg-dark"/>
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark">N° du marche / N° eTravaux</strong>
+                    <span th:text="${marche.numero + ' / ' + marche.eTravaux}"></span>
+                </p>
+            </div>
+            <!-------------------------------  fin de div.media text-muted : Type --------------------------->
+
+            <!---  début de div.media text-muted : Type----------------------------------------------------->
+            <div class="media text-muted pt-3">
+                <img th:src="@{/img/type.png}" alt="" class="mr-2 rounded bg-dark"/>
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark">N° fournisseur / N° client</strong>
+                    <span th:text="${marche.fournisseur + ' / ' + marche.client}"></span>
+                </p>
+            </div>
+            <!-------------------------------  fin de div.media text-muted : Type --------------------------->
+
+
+
+            <!---  début de div.media text-muted : Orientation ----------------------------------------------------->
+            <div class="media text-muted pt-3" >
+                <img th:src="@{/img/orientation.png}" alt="" class="mr-2 rounded bg-dark"/>
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark">N° Call Center</strong>
+                    <span th:text="${site.callCenter.phone}"></span>
+                </p>
+            </div>
+            <!-------------------------------  fin de div.media text-muted : Orientation --------------------------->
+
+            <!---  début de div.media text-muted : Voies ----------------------------------------------------->
+            <div class="media text-muted pt-3">
+                <img th:src="@{/img/voies.png}" alt="" class="mr-2 rounded bg-dark"/>
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark">Ouverture du Call Center</strong>
+                    <span class="text-muted"  th:text="${ site.callCenter.openingTime }"></span>
+                </p>
+            </div>
+            <!-------------------------------  fin de div.media text-muted : Voies --------------------------->
+        </div>
+        <!-------------------------------  fin de div.media-body --------------------------->
+
+    </div>
+    <!-------------------------------  fin de div.media --------------------------->
+</div>
+<!-------------------------------  fin de th:fragment="infoHeader" --------------------------->
+
+<!-- début de th:fragment="subMenuMarche" --------------------------------------------------->
+<th:block th:fragment="subMenuMarche">
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/marche/info/detail/{id}(id=${idMarche})}" >
+                <span data-feather="file"></span>
+                Détail du marché
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/marche/info/poseur/actif/{id}(id=${idMarche})}">
+                <span data-feather="shopping-cart"></span>
+                Les poseurs en activités
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/marche/info/poseur/inactif/{id}(id=${idMarche})}">
+                <span data-feather="shopping-cart"></span>
+                Les poseurs en inactivités
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/marche/info/indemnisation/all/{id}(id=${idMarche})}">
+                <span data-feather="shopping-cart"></span>
+                Les indemnisations
+            </a>
+        </li>
+    </ul>
+</th:block>
+<!------------------------------------- fin de th:fragment="subMenuMarche" ------------------>
+<!---  début de th:fragment="siteContent" ----------------------------------------------------->
+<form th:fragment="content( title, action)" action="#" th:action="${ action }"  method="post"  class="needs-validation" >
+
+    <th:block th:insert="~{common/fragment/common :: titleH4( ${title } ) }"></th:block>
+
+
+    <th:block th:insert="~{common/fragment/common :: contentError }"></th:block>
+
+    <div class="offset-1 col-10 my-1 p-1 bg-white rounded box-shadow">
+        <h4 class="mb-3">Le marché</h4>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="name">Nom du marché</label>
+                <input type="text" th:field="*{name}" class="form-control"  id="name" placeholder="Saisir un nom de marché"  />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="numero">Numéro de marché</label>
+                <input type="text" th:field="*{numero}" class="form-control"  id="numero"  />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="eTravaux">Numéro eTravaux</label>
+                <input type="text" th:field="*{eTravaux}" class="form-control"  id="eTravaux"  />
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="input-group col-md-5 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="typeMarche">Type de marché</label>
+                </div>
+                <select class="custom-select" id="typeMarche" th:field="*{typeMarche.id}" >
+                    <option value="" >Choisir...</option>
+                    <option th:each="t : ${typeMarcheBeanList}" th:value="${t.id}" th:text="${t.name}"></option>
+                </select>
+            </div>
+            <div class="input-group col-md-5 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="idOrganization">Organisation</label>
+                </div>
+                <select class="custom-select" id="idOrganization" th:field="*{idOrganization}" >
+                    <option value="" >Choisir...</option>
+                    <option th:each="o : ${organizationBeanList}" th:value="${o.id}" th:text="${o.name}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5 mb-3">
+                <label for="fournisseur">Numéro Fournisseur</label>
+                <input type="number" th:field="*{fournisseur}" class="form-control"  id="fournisseur" />
+            </div>
+            <div class="col-md-5 mb-3">
+                <label for="client">Numéro client</label>
+                <input type="number" th:field="*{client}" class="form-control"  id="client" />
+            </div>
+        </div>
+        <h4 class="mb-3">Prestataire</h4>
+        <div class="row">
+            <div class="input-group col-md-6 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="idPrestataire">Titulaire</label>
+                </div>
+                <select class="custom-select" id="idPrestataire" th:field="*{idPrestataire}" >
+                    <option value="" >Choisir...</option>
+                    <option th:each="p : ${entrepriseBeanList}" th:value="${p.id}" th:text="${p.name}"></option>
+                </select>
+            </div>
+            <div class="input-group col-md-6 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="idSousTraitant">Sous-Traitant</label>
+                </div>
+                <select class="custom-select" id="idSousTraitant" th:field="*{idSousTraitant}" >
+                    <option value="" >Choisir...</option>
+                    <option th:each="s : ${entrepriseBeanList}" th:value="${s.id}" th:text="${s.name}"></option>
+                </select>
+            </div>
+        </div>
+        <h4 class="mb-3">Dates du marché</h4>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="dateStart">Date de début</label>
+                <input type="date" th:field="*{dateStart}" class="form-control"  id="dateStart" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="dateEnd">Date de fin</label>
+                <input type="date" th:field="*{dateEnd}" class="form-control"  id="dateEnd" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="dateClosed">Date de clôture</label>
+                <input type="date" th:field="*{dateClosed}" class="form-control"  id="dateClosed" />
+            </div>
+        </div>
+        <h4 class="mb-3">Site du marché</h4>
+        <div class="row">
+
+            <div class="input-group col-md-5 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="idSite">Site</label>
+                </div>
+                <select class="custom-select" id="idSite" th:field="*{idSite}" >
+                    <option value="" >Choisir...</option>
+                    <option th:each="s : ${sitePrestataireBeanList}" th:value="${s.id}" th:text="${s.name}"></option>
+                </select>
+            </div>
+
+        </div>
+        <h4 class="mb-3">Référents du marché</h4>
+        <div class="row">
+
+            <div class="input-group col-md-8 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="idRef1">Référent principal</label>
+                </div>
+                <select class="custom-select" id="idRef1" th:field="*{idRef1}" >
+                    <option value="" >Choisir...</option>
+                    <option th:each="u : ${userEntrepriseBeanList}" th:value="${u.id}" th:text="${u.firstName + ' '+ u.lastName + ' ('+ u.nni + ')' }"></option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-group col-md-8 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="idRef2">Appui au référent</label>
+                </div>
+                <select class="custom-select" id="idRef2" th:field="*{idRef2}" >
+                    <option value="" >Choisir...</option>
+                    <option th:each="u : ${userEntrepriseBeanList}" th:value="${u.id}" th:text="${u.firstName + ' '+ u.lastName + ' ('+ u.nni + ')' }"></option>
+                </select>
+            </div>
+
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary m-2">Valider</button>
+</form>
+
+</body>
+</html>

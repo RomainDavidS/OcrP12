@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{layout}">
+
+<head>
+    <title>Sites</title>
+</head>
+<body>
+<main role="main" class="container"  layout:fragment="content">
+
+    <div class="alert alert-danger m-2" role="alert">
+        <h4 class="alert-heading">Et ben non !!!</h4>
+        <p>Vous n'êtes pas autorisés à réaliser cette demande.</p>
+        <hr>
+        <p class="mb-0">
+            Toutefois si vous pensez que c'est une erreur, veuillez contacter le responsable du site.
+        </p>
+    </div>
+</main>
+
+</body>
+</html>

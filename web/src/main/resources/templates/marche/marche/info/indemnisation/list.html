@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{layout-sub-menu}">
+
+<title>Liste des indemnisations</title>
+</head>
+<body>
+<div layout:fragment="subMenu" class="sidebar-sticky">
+
+    <th:block th:insert="~{ marche/marche/fragment :: subMenuMarche  }"></th:block>
+
+
+</div>
+
+<div layout:fragment="content" th:with="plg = ${@plugin}">
+    <h2 class="offset-1 text-muted" th:text="${'Marché - ' + marcheBean.name }"></h2>
+
+    <th:block th:insert="~{ common/fragment/common :: mainTitle( 'Liste des indemnisations', '/marche/info/indemnisation/add/' + ${idMarche})  }"></th:block>
+
+    <!---  début de th:fragment="content" ----------------------------------------------------->
+    <div  >
+        <div class="offset-2 alert alert-info text-center col-4" role="alert" th:if="${ marcheBean.indemnisationList.size() == 0}">
+            Aucune indemnisation à afficher
+        </div>
+        <div  class="offset-1 card my-1 col-11" th:if="${marcheBean.indemnisationList.size() > 0}">
+            <div class="card-body" >
+
+                <div class="container my-1 " >
+                    <div class="col-md-12">
+                        <table class="table table-striped table-responsive-md table-sm"
+                               id="tableIndemnisation"
+                               data-toggle="table"
+                               data-search="true"
+                               data-show-search-clear-button="true"
+                               data-filter-control="true"
+                               data-pagination="true">
+                            <thead>
+                            <tr>
+                                <th scope="col" data-field="indemnisationStatus" data-sortable="true" data-filter-control="select" data-width="100"  >Status</th>
+                                <th scope="col" data-field="indemnisationPdl" data-sortable="true" data-filter-control="input" data-width="100" >PDL</th>
+                                <th scope="col" data-field="indemnisationClientName" data-sortable="true" data-filter-control="input" data-width="200"  >Nom du client</th>
+                                <th scope="col" data-field="indemnisationDateReclamation" data-sortable="true" data-filter-control="select" data-width="60" >Date de réclamation</th>
+                                <th scope="col" data-field="indemnisationReclamation" data-sortable="true"  >Réclamation</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            <tr th:each="i : ${marcheBean.indemnisationList}" >
+                                <td th:text="${i.status.code}"></td>
+                                <td><a th:href="@{/marche/info/indemnisation/edit/{id}/{idMarche}(id=${i.id},idMarche=${idMarche})}" th:text="${i.pdl}"  ></a></td>
+                                <td th:text="${i.clientName}"></td>
+                                <td th:text="${plg.getDate(i.reclamationDate)}" class="text-center"></td>
+                                <td th:text="${i.reclamation}">
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

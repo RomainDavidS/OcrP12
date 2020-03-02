@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{layout-sub-menu}">
+
+<title>Administration des sites Entreprise</title>
+</head>
+<body>
+<div layout:fragment="subMenu" class="sidebar-sticky">
+
+    <th:block th:insert="~{ common/fragment/administration :: subMenuEntreprise  }"></th:block>
+
+
+</div>
+<div layout:fragment="content" th:object="${userEntrepriseBean}">
+    <th:block th:insert="~{ users/user/fragment :: content(  'Modification d\'un utilisateur Entreprise','/entreprise/user/update/' + ${userEntrepriseBean.id} ) }"></th:block>
+</div>
+
+</body>
+</html>

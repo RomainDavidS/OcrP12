@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{layout}">
+
+<title>Ajout d'un bulletin</title>
+</head>
+<body>
+
+<div layout:fragment="content" th:object="${managementVisuelBean}" th:with="fileNameMV = ${  'Sélectionner un visuel' }">
+
+    <th:block th:insert="~{ agence/fragment :: contentAdd(  'Ajout d\'un management visuel','/managementVisuel/save'  ) }"></th:block>
+</div>
+
+</body>
+</html>

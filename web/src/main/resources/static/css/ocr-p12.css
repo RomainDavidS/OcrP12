@@ -1,0 +1,198 @@
+/*Document CSS */
+/*
+body {
+    background: url('/img/fond/ladakh-2818861__340.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+*/
+.photoIdentitySize{
+    /*width: 500px;
+    height: 150px;
+    */
+
+}
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+.nav>li{
+    border-right: none;
+}
+
+.navbar-brand{
+    box-shadow: none;
+}
+
+.logo{
+    width: 36px;
+    height: 36px;
+}
+.colEtat {
+    width: 95px;
+}
+.colNom {
+    width: 175px;
+}
+.colValidation {
+    width: 145px;
+}
+.custom-file-input ~ .custom-file-label:lang(fr)::after {
+    content: "Parcourir";
+}
+.photoSize{
+    max-width: 200px;
+    max-height: 250px;
+}
+.photoTopoSite{
+    max-width: 55px;
+    max-height: 35px;
+}
+main.container{
+    /*
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: .8rem;
+    color: #666666;  */
+  /*  padding-top: 40px;*/
+
+
+}
+.card{
+    min-width: 500px;
+}
+.card-img-top {
+    max-width: 200px;
+    height: 250px;
+
+}
+/* navbar */
+
+.navbar-nav li:hover > ul.dropdown-menu {
+    display: block;
+}
+.dropdown-submenu {
+    position:relative;
+}
+.dropdown-submenu>.dropdown-menu {
+    top:0;
+    /*left:100%; */
+    left:10rem; /* 10rem is the min-width of dropdown-menu */
+    margin-top:-6px;
+}
+
+/* rotate caret on hover */
+.dropdown-menu > li > a:hover:after {
+    text-decoration: underline;
+    transform: rotate(-90deg);
+}
+.dropdown-menu > li > a:hover {
+    background-color: #9bcc60;
+}
+
+/* Site Album */
+:root {
+    --jumbotron-padding-y: .1rem;
+}
+
+.jumbotron {
+    padding-top: var(--jumbotron-padding-y);
+    padding-bottom: var(--jumbotron-padding-y);
+    margin-bottom: 0;
+    background-color: #fff;
+}
+@media (min-width: 768px) {
+    .jumbotron {
+        padding-top: calc(var(--jumbotron-padding-y) * 2);
+        padding-bottom: calc(var(--jumbotron-padding-y) * 2);
+    }
+}
+
+.jumbotron p:last-child {
+    margin-bottom: 0;
+}
+
+.jumbotron-heading {
+    font-weight: 300;
+}
+
+.jumbotron .container {
+    max-width: 70rem;
+}
+
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 17px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: green;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+
+input:checked + .slider {
+    background-color: red;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px red;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(13px);
+    -ms-transform: translateX(13px);
+    transform: translateX(13px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 17px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}

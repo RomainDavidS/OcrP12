@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{layout}">
+
+<head>
+    <title>Sites</title>
+</head>
+<body>
+<main role="main" class="container"  layout:fragment="content">
+
+    <div class="alert alert-success m-2" role="alert">
+        <h4 class="alert-heading" th:text="${title}">Aucune information à afficher</h4>
+        <hr>
+        <p class="mb-0">
+            Toutefois si vous pensez que c'est une erreur, veuillez contacter le gestionnaire de la bibliothèque.
+        </p>
+    </div>
+</main>
+
+</body>
+</html>

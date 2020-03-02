@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{layout-sub-menu}">
+
+<title>Administration des entreprises</title>
+</head>
+<body>
+<div layout:fragment="subMenu" class="sidebar-sticky">
+    <th:block th:insert="~{ common/fragment/administration :: subMenuPrestataire  }"></th:block>
+</div>
+
+<div layout:fragment="content">
+
+    <th:block th:insert="~{ common/fragment/common :: mainTitle( 'Liste des entreprises', '/entreprise/add')  }"></th:block>
+
+    <!---  début de th:fragment="content" ----------------------------------------------------->
+    <div  >
+        <div class="alert alert-info text-center" role="alert" th:if="${  entrepriseBeanList.size() == 0}">
+            Aucune entreprise à afficher
+        </div>
+        <div  class="card my-1 col-11" th:if="${ entrepriseBeanList.size() > 0}">
+            <div class="card-body" >
+
+                <div class="container my-1 " >
+                    <div class="col-md-12">
+                        <table class="table table-striped table-responsive-md table-sm"
+                               id="tableEntreprise"
+                               data-toggle="table"
+                               data-pagination="true">
+                            <thead>
+                            <tr>
+                                <th scope="col" data-field="entrepriseId" data-sortable="true" data-width="30" >#</th>
+                                <th scope="col" data-field="entrepriseSiret" data-sortable="true" >Siret</th>
+                                <th scope="col" data-field="entrepriseName" data-sortable="true"  >Nom</th>
+                                <th scope="col" data-field="entrepriseComplementAdresse" data-sortable="true"  >Complément adresse</th>
+                                <th scope="col" data-field="entrepriseAdresse" data-sortable="true"  >Adresse</th>
+                                <th scope="col" data-field="entrepriseCommune" data-sortable="true"  >Commune</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            <tr th:each="e : ${entrepriseBeanList}" >
+                                <td th:text="${e.id}" class="text-center"  > &nbsp;</td>
+                                <td th:text="${e.siret}" > </td>
+                                <td >
+                                    <a th:href="@{/entreprise/edit/{id}(id=${e.id})}" th:text="${e.name}"  ></a>
+                                </td>
+                                <td th:text="${e.adressPostaleComplement}" > </td>
+                                <td th:text="${e.adressPostaleAdress}" > </td>
+                                <td th:text="${e.adressPostaleCommune}" > </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------------------------------  fin de div.row : Description --------------------------->
+
+
+</div>
+
+</body>
+</html>

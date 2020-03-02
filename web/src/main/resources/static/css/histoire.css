@@ -1,0 +1,27 @@
+/* document css*/
+
+
+main.container{
+
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: .8rem;
+    color: #666666;
+
+
+
+}
+.page-title{
+    text-transform: initial;
+}
+h1{
+    text-transform: uppercase;
+    font-size: 20.8px;
+}
+.entry h3 {
+    font-size: 1.6em;
+    letter-spacing: -.5px;
+}
+p{
+    font-size: 1.1em;
+    font-weight: 100;
+}

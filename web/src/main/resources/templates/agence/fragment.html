@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<!---  début de th:fragment="siteContent" ----------------------------------------------------->
+<form th:fragment="contentAdd( title, action)" action="#" th:action="${ action }"  method="post"  class="needs-validation" >
+
+    <th:block th:insert="~{common/fragment/common :: titleH4( ${title } ) }"></th:block>
+
+
+    <th:block th:insert="~{common/fragment/common :: contentError }"></th:block>
+
+    <div class="my-3 p-1 bg-white rounded box-shadow">
+        <!-------------------- fin de div.row : ---------------->
+        <div class="row">
+            <div class="input-group input-group-lg col-md-5 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Nom du management visuel</label>
+                </div>
+                <input type="text" th:field="*{name}" class="form-control"  id="name" />
+            </div>
+        </div>
+        <th:block th:insert="~{common/fragment/common :: uploadFile ('Téléchargement du management visuel',${fileNameMV},'uploadMV') }"></th:block>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <label >Publication</label>
+                <div class="custom-control custom-radio" th:each="tag : ${tagIsEnabled}">
+                    <input type="radio" th:field="*{publication}"  th:value="${tag.value}"  class="custom-control-input"   />
+                    <label class="custom-control-label" th:for="${#ids.prev('publication')}" th:text="${tag.text}"></label>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary m-2">Valider</button>
+</form>
+
+<!---  début de th:fragment="siteContent" ----------------------------------------------------->
+<form th:fragment="contentUpdate( title, action)" action="#" th:action="${ action }"  method="post"  class="needs-validation" >
+
+    <th:block th:insert="~{common/fragment/common :: titleH4( ${title } ) }"></th:block>
+
+
+    <th:block th:insert="~{common/fragment/common :: contentError }"></th:block>
+
+    <div class="my-3 p-1 bg-white rounded box-shadow">
+        <!-------------------- fin de div.row : ---------------->
+        <div class="row">
+            <div class="input-group input-group-lg col-md-5 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Nom du management visuel</label>
+                </div>
+                <input type="text" th:field="*{name}" class="form-control"  id="name" />
+            </div>
+            <a  class="nav-link" th:href="@{/downloadFile/{id}(id=${managementVisuelBean.id})}" >Télécharger le visuel</a>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <label >Publication</label>
+                <div class="custom-control custom-radio" th:each="tag : ${tagIsEnabled}">
+                    <input type="radio" th:field="*{publication}"  th:value="${tag.value}"  class="custom-control-input"   />
+                    <label class="custom-control-label" th:for="${#ids.prev('publication')}" th:text="${tag.text}"></label>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary m-2">Valider</button>
+</form>
+
+</body>
+</html>

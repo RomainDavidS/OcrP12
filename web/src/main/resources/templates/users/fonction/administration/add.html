@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{layout-sub-menu}">
+
+<title>Ajout d'une fonction</title>
+</head>
+<body>
+<div layout:fragment="subMenu" class="sidebar-sticky">
+    <th:block th:insert="~{ common/fragment/administration :: subMenuEntreprise  }"></th:block>
+</div>
+
+<div layout:fragment="content" th:object="${fonctionBean}">
+    <th:block th:insert="~{ users/fonction/fragment :: content(  'Ajout d\'une fonction Entreprise','/entreprise/fonction/save') }"></th:block>
+</div>
+
+</body>
+</html>

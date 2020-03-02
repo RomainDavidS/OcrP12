@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<!---  début de th:fragment="siteContent" ----------------------------------------------------->
+<form th:fragment="content( title, action)" action="#" th:action="${ action }"  method="post"  class="needs-validation" >
+
+    <th:block th:insert="~{ common/fragment/common :: titleH4( ${title } ) }"></th:block>
+
+
+    <th:block th:insert="~{common/fragment/common :: contentError }"></th:block>
+
+    <div class="offset-2 col-7 my-3 p-1 bg-white rounded box-shadow">
+        <h4 class="mb-3">Utilisateur</h4>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="nni">Nni</label>
+                <div class="input-group">
+                    <input type="text" th:field="*{nni}" class="form-control"  id="nni" placeholder="Saisir un Nni" aria-label="Nni" aria-describedby="button-search-nni" th:readonly="${readonly==true}" />
+                    <!--div class="input-group-append" th:if="${readonly == false}">
+                        <button class="btn btn-outline-secondary" type="button" id="button-search-nni">Rechercher</button>
+                    </div-->
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="firstName">Prénom</label>
+                <input type="text" th:field="*{firstName}" class="form-control"  id="firstName" th:readonly="${readonly==true}" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="lastName">Nom</label>
+                <input type="text" th:field="*{lastName}" class="form-control"  id="lastName" th:readonly="${readonly==true}" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="cellPhone">Tél. Portable</label>
+                <input type="text" th:field="*{cellPhone}" class="form-control"  id="cellPhone" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="officePhone">Tél. Bureau</label>
+                <input type="text" th:field="*{officePhone}" class="form-control"  id="officePhone" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="email">Email</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">@</span>
+                    </div>
+                    <input type="text" class="form-control" th:field="*{email}" id="email" placeholder="Email" th:readonly="${readonly==true}" >
+                </div>
+            </div>
+
+        </div>
+        <h4 class="mb-3">Habilitation</h4>
+        <div class="row">
+            <div class="input-group col-md-5 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="role">Rôle</label>
+                </div>
+                <select class="custom-select" id="role" th:field="*{role.id}" >
+                    <option value="" >Choisir...</option>
+                    <option th:each="r : ${roleBeanList}" th:value="${r.id}" th:text="${r.libelle}"></option>
+                </select>
+            </div>
+            <div class="input-group col-md-5 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" >Fonction</label>
+                </div>
+                <!---->
+                <select class="custom-select" th:field="*{fonction.id}"   >
+                    <option value="" >Choisir...</option>
+                    <option th:each="f : ${fonctionBeanList}" th:value="${f.id}" th:text="${f.name}"></option>
+                </select>
+            </div>
+
+
+
+        </div>
+        <div class="row">
+
+            <div class="input-group col-md-5 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="organization">Organisation</label>
+                </div>
+                <select class="custom-select" id="organization" th:field="*{organization.id}" >
+                    <option value="" >Choisir...</option>
+                    <option th:each="o : ${organizationBeanList}" th:value="${o.id}" th:text="${o.name}"></option>
+                </select>
+            </div>
+            <div class="input-group col-md-5 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="site">Site</label>
+                </div>
+                <select class="custom-select" id="site" th:field="*{site.id}" >
+                    <option value="" >Choisir...</option>
+                    <option th:each="s : ${siteEntrepriseBeanList}" th:value="${s.id}" th:text="${s.name}"></option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <label >Publication</label>
+                <div class="custom-control custom-radio" th:each="tag : ${tagIsEnabled}">
+                    <input type="radio" th:field="*{enabled}"  th:value="${tag.value}"  class="custom-control-input"   />
+                    <label class="custom-control-label" th:for="${#ids.prev('enabled')}" th:text="${tag.text}"></label>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label >Expiration</label>
+                <div class="custom-control custom-radio" th:each="tag : ${tagIsAccountNoExpired}">
+                    <input type="radio" th:field="*{accountNoExpired}"  th:value="${tag.value}"  class="custom-control-input"  />
+                    <label class="custom-control-label" th:for="${#ids.prev('accountNoExpired')}" th:text="${tag.text}"></label>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label >Blocage</label>
+                <div class="custom-control custom-radio" th:each="tag : ${tagIsAccountNoLocked}">
+                    <input type="radio" th:field="*{accountNoLocked}"  th:value="${tag.value}"  class="custom-control-input" />
+                    <label class="custom-control-label" th:for="${#ids.prev('accountNoLocked')}" th:text="${tag.text}"></label>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label >Token</label>
+                <div class="custom-control custom-radio" th:each="tag : ${tagIsTokenNoExpired}">
+                    <input type="radio" th:field="*{tokenNoExpired}"  th:value="${tag.value}"  class="custom-control-input"  />
+                    <label class="custom-control-label" th:for="${#ids.prev('tokenNoExpired')}" th:text="${tag.text}"></label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary m-2">Valider</button>
+</form>
+
+</body>
+</html>
