@@ -17,7 +17,7 @@
 
 <div layout:fragment="content">
 
-    <th:block th:insert="~{ common/fragment/common :: mainTitle( 'Liste des types de site Entreprise', '/entreprise/typeSite/add')  }"></th:block>
+    <th:block th:insert="~{ common/fragment/common :: mainTitle( 'Liste des types de site Entreprise', '/users/typeSite/add')  }"></th:block>
 
     <!---  début de th:fragment="content" ----------------------------------------------------->
     <div  >
@@ -45,7 +45,7 @@
                             <tr th:each="t : ${typeSiteBeanList}" >
                                 <td th:text="${t.id}" class="text-center"  > &nbsp;</td>
                                 <td >
-                                    <a th:href="@{/entreprise/typeSite/edit/{id}(id=${t.id})}" th:text="${t.name}"  ></a>
+                                    <a th:href="@{/users/typeSite/edit/{id}(id=${t.id})}" th:text="${t.name}"  ></a>
 
                                 </td>
                             </tr>

@@ -13,7 +13,7 @@
 </div>
 
 <div layout:fragment="content" th:object="${typeSiteBean}">
-    <th:block th:insert="~{ users/typesite/fragment :: content(  'Modification d\'un type de site Entreprise','/entreprise/typeSite/update/' + ${typeSiteBean.id} ) }"></th:block>
+    <th:block th:insert="~{ users/typesite/fragment :: content(  'Modification d\'un type de site Entreprise','/users/typeSite/update/' + ${typeSiteBean.id} ) }"></th:block>
 </div>
 
 </body>

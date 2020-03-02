@@ -15,7 +15,7 @@
 
 </div>
 <div layout:fragment="content" th:object="${userEntrepriseBean}">
-    <th:block th:insert="~{ users/user/fragment :: content(  'Modification d\'un utilisateur Entreprise','/entreprise/user/update/' + ${userEntrepriseBean.id} ) }"></th:block>
+    <th:block th:insert="~{ users/user/fragment :: content(  'Modification d\'un utilisateur Entreprise','/users/user/update/' + ${userEntrepriseBean.id} ) }"></th:block>
 </div>
 
 </body>

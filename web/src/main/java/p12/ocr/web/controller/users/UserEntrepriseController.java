@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/entreprise/user")
+@RequestMapping("/users/user")
 public class UserEntrepriseController {
 
     @Autowired
@@ -143,14 +143,14 @@ public class UserEntrepriseController {
     @GetMapping("/administration")
     public String list(Model model){
 
-        return "entreprise/user/administration/index";
+        return "users/user/administration/index";
 
     }
 
     @GetMapping("/add")
     public String add(Model model){
         model.addAttribute("readonly",false);
-        return "entreprise/user/administration/add"; }
+        return "users/user/administration/add"; }
 
     @PostMapping("/save")
     public String save(@ModelAttribute  @Valid UserEntrepriseBean userEntrepriseBean, BindingResult result, Model model){
@@ -165,12 +165,12 @@ public class UserEntrepriseController {
 
         if (result.hasErrors()) {
             model.addAttribute("readonly",false);
-            return "entreprise/user/administration/add";
+            return "users/user/administration/add";
         }
 
         userEntrepriseService.save(userEntrepriseBean);
 
-        return "redirect:/entreprise/user/administration?addSuccess";
+        return "redirect:/users/user/administration?addSuccess";
 
     }
 
@@ -179,12 +179,12 @@ public class UserEntrepriseController {
         UserEntrepriseBean userEntrepriseBean = userEntrepriseService.findByNni( nni );
         if(userEntrepriseBean == null){
             model.addAttribute("readonly",false);
-            return "entreprise/user/administration/add";
+            return "users/user/administration/add";
         }
 
         model.addAttribute(userEntrepriseBean);
         model.addAttribute("readonly",true);
-        return "entreprise/user/administration/update";
+        return "users/user/administration/update";
     }
 
     @PostMapping("/update/{id}")
@@ -194,13 +194,13 @@ public class UserEntrepriseController {
 
         if (result.hasErrors()) {
             model.addAttribute("readonly",true);
-            return "entreprise/user/administration/update";
+            return "users/user/administration/update";
         }
         UserEntrepriseBean userEntreprise = userEntrepriseService.findById( id );
         userEntrepriseBean.setLastConnection( userEntreprise .getLastConnection() );
         userEntrepriseBean.setDateCreate( userEntreprise.getDateCreate() );
         userEntrepriseService.update(userEntrepriseBean);
-        return "redirect:/entreprise/user/administration?updateSuccess";
+        return "redirect:/users/user/administration?updateSuccess";
 
     }
 }

@@ -13,7 +13,7 @@
 </div>
 
 <div layout:fragment="content" th:object="${organizationBean}">
-    <th:block th:insert="~{ users/organization/fragment :: content(  'Modification d\'un territoire Entreprise','/entreprise/organization/update/' + ${organizationBean.id} ) }"></th:block>
+    <th:block th:insert="~{ users/organization/fragment :: content(  'Modification d\'un territoire Entreprise','/users/organization/update/' + ${organizationBean.id} ) }"></th:block>
 </div>
 
 </body>

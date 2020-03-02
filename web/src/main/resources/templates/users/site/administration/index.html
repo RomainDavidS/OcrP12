@@ -17,7 +17,7 @@
 
 <div layout:fragment="content">
 
-    <th:block th:insert="~{ common/fragment/common :: mainTitle( 'Liste des sites Entreprise', '/entreprise/site/add')  }"></th:block>
+    <th:block th:insert="~{ common/fragment/common :: mainTitle( 'Liste des sites Entreprise', '/users/site/add')  }"></th:block>
 
 
     <!---  début de th:fragment="content" ----------------------------------------------------->
@@ -47,7 +47,7 @@
                             <tr th:each="s : ${siteEntrepriseBeanList}" >
                                 <td th:text="${s.id}" class="text-center"  > &nbsp;</td>
                                 <td >
-                                    <a th:href="@{/entreprise/site/edit/{id}(id=${s.id})}" th:text="${s.name}"  ></a>
+                                    <a th:href="@{/users/site/edit/{id}(id=${s.id})}" th:text="${s.name}"  ></a>
 
                                 </td>
                                 <td th:text="${s.typeSite.name}" class="text-center"  > &nbsp;</td>

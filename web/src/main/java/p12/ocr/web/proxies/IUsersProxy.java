@@ -97,7 +97,7 @@ public interface IUsersProxy {
     List<TypeSiteBean> findAllTypeSite();
 
     @PostMapping("/typeSite/save")
-    TypeSiteBean saveTypeSave( @RequestBody TypeSiteBean typeSite);
+    TypeSiteBean saveTypeSite( @RequestBody TypeSiteBean typeSite);
 
     @PutMapping("/typeSite/update")
     void updateTypeSite( @RequestBody TypeSiteBean typeSite);

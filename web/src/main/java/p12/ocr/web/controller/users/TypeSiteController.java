@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/entreprise/typeSite")
+@RequestMapping("/users/typeSite")
 public class TypeSiteController {
     @Autowired
     private ITypeSiteService typeSiteService;
@@ -38,22 +38,22 @@ public class TypeSiteController {
     @GetMapping("/administration")
     public String list(Model model){
 
-        return "entreprise/typesite/administration/index";
+        return "users/typesite/administration/index";
 
     }
 
     @GetMapping("/add")
-    public String add(Model model){return "entreprise/typesite/administration/add"; }
+    public String add(Model model){return "users/typesite/administration/add"; }
 
     @PostMapping("/save")
     public String save(@ModelAttribute  @Valid TypeSiteBean typeSiteBean, BindingResult result, Model model){
 
         if (result.hasErrors())
-            return "entreprise/typesite/administration/add";
+            return "users/typesite/administration/add";
 
         typeSiteService.save( typeSiteBean );
 
-        return "redirect:/entreprise/typeSite/administration?addSuccess";
+        return "redirect:/users/typeSite/administration?addSuccess";
 
     }
 
@@ -61,20 +61,20 @@ public class TypeSiteController {
     public String edit(@PathVariable Long id, Model model) {
         TypeSiteBean typeSiteBean = typeSiteService.findById( id );
         if (typeSiteBean == null )
-            return "entreprise/typesite/administration/add";
+            return "users/typesite/administration/add";
 
         model.addAttribute(  typeSiteBean );
-        return "entreprise/typesite/administration/update";
+        return "users/typesite/administration/update";
     }
 
     @PostMapping("/update/{id}")
     public String update( @PathVariable Long id, @Valid TypeSiteBean typeSiteBean, BindingResult result){
 
         if (result.hasErrors())
-            return "entreprise/typesite/administration/update";
+            return "users/typesite/administration/update";
 
         typeSiteService.update( typeSiteBean );
-        return "redirect:/entreprise/typeSite/administration?updateSuccess";
+        return "redirect:/users/typeSite/administration?updateSuccess";
 
     }
 }

@@ -33,7 +33,7 @@ public class TypeSiteServiceImpl implements ITypeSiteService {
      * @param typeSite TypeSite à créer
      * @return TypeSiteBean
      */
-    public TypeSiteBean save( TypeSiteBean typeSite){ return usersProxy.saveTypeSave( typeSite );}
+    public TypeSiteBean save( TypeSiteBean typeSite){ return usersProxy.saveTypeSite( typeSite );}
 
     /**
      * Permet la mise à jour d'un type de site des users

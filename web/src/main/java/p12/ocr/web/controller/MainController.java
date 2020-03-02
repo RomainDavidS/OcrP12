@@ -25,7 +25,7 @@ public class MainController {
 
     @GetMapping("/login")
     public String login(Model model) {
-        return "entreprise/user/administration/login";
+        return "users/user/administration/login";
     }
 
 

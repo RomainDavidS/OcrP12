@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/entreprise/fonction")
+@RequestMapping("/users/fonction")
 public class FonctionController {
 
 
@@ -41,14 +41,14 @@ public class FonctionController {
     @GetMapping("/administration")
     public String list(Model model){
 
-        return "entreprise/fonction/administration/index";
+        return "users/fonction/administration/index";
 
     }
 
     @GetMapping("/add")
     public String add(Model model){
 
-        return "entreprise/fonction/administration/add";
+        return "users/fonction/administration/add";
 
     }
 
@@ -56,11 +56,11 @@ public class FonctionController {
     public String save(@ModelAttribute  @Valid FonctionBean fonctionBean, BindingResult result, Model model){
 
         if (result.hasErrors())
-            return "entreprise/fonction/administration/add";
+            return "users/fonction/administration/add";
 
         fonctionService.save( fonctionBean );
 
-        return "redirect:/entreprise/fonction/administration?addSuccess";
+        return "redirect:/users/fonction/administration?addSuccess";
 
     }
 
@@ -68,20 +68,20 @@ public class FonctionController {
     public String edit(@PathVariable Long id, Model model) {
         FonctionBean fonctionBean = fonctionService.findById( id );
         if( fonctionBean == null)
-            return "entreprise/fonction/administration/add";
+            return "users/fonction/administration/add";
 
         model.addAttribute(  fonctionBean );
-        return "entreprise/fonction/administration/update";
+        return "users/fonction/administration/update";
     }
 
     @PostMapping("/update/{id}")
     public String update( @PathVariable Long id, @Valid FonctionBean fonctionBean, BindingResult result){
 
         if (result.hasErrors())
-            return "entreprise/fonction/administration/update";
+            return "users/fonction/administration/update";
 
         fonctionService.update( fonctionBean );
-        return "redirect:/entreprise/fonction/administration?updateSuccess";
+        return "redirect:/users/fonction/administration?updateSuccess";
 
     }
 

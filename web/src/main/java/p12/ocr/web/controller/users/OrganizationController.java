@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/entreprise/organization")
+@RequestMapping("/users/organization")
 public class OrganizationController {
     @Autowired
     private IOrganizationService organizationService;
@@ -39,14 +39,14 @@ public class OrganizationController {
     @GetMapping("/administration")
     public String list(Model model){
 
-        return "entreprise/organization/administration/index";
+        return "users/organization/administration/index";
 
     }
 
     @GetMapping("/add")
     public String add(Model model){
 
-        return "entreprise/organization/administration/add";
+        return "users/organization/administration/add";
 
     }
 
@@ -54,11 +54,11 @@ public class OrganizationController {
     public String save(@ModelAttribute  @Valid OrganizationBean organizationBean, BindingResult result, Model model){
 
         if (result.hasErrors())
-            return "entreprise/organization/administration/add";
+            return "users/organization/administration/add";
 
         organizationService.save( organizationBean );
 
-        return "redirect:/entreprise/organization/administration?addSuccess";
+        return "redirect:/users/organization/administration?addSuccess";
 
     }
 
@@ -66,21 +66,21 @@ public class OrganizationController {
     public String edit(@PathVariable Long id, Model model) {
         OrganizationBean organizationBean = organizationService.findById( id );
         if(organizationBean == null )
-            return "entreprise/organization/administration/add";
+            return "users/organization/administration/add";
 
 
         model.addAttribute(  organizationBean );
-        return "entreprise/organization/administration/update";
+        return "users/organization/administration/update";
     }
 
     @PostMapping("/update/{id}")
     public String update( @PathVariable Long id, @Valid OrganizationBean organizationBean, BindingResult result){
 
         if (result.hasErrors())
-            return "entreprise/organization/administration/update";
+            return "users/organization/administration/update";
 
         organizationService.update( organizationBean );
-        return "redirect:/entreprise/organization/administration?updateSuccess";
+        return "redirect:/users/organization/administration?updateSuccess";
 
     }
 

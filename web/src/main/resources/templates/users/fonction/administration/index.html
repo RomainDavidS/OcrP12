@@ -17,7 +17,7 @@
 
 <div layout:fragment="content">
 
-    <th:block th:insert="~{ common/fragment/common :: mainTitle( 'Liste des fonctions Entreprise', '/entreprise/fonction/add')  }"></th:block>
+    <th:block th:insert="~{ common/fragment/common :: mainTitle( 'Liste des fonctions Entreprise', '/users/fonction/add')  }"></th:block>
 
     <!---  début de th:fragment="content" ----------------------------------------------------->
     <div>
@@ -45,7 +45,7 @@
                             <tr th:each="f : ${fonctionBeanList}" >
                                 <td th:text="${f.id}" class="text-center"  > &nbsp;</td>
                                 <td >
-                                    <a th:href="@{/entreprise/fonction/edit/{id}(id=${f.id})}" th:text="${f.name}"  ></a>
+                                    <a th:href="@{/users/fonction/edit/{id}(id=${f.id})}" th:text="${f.name}"  ></a>
 
                                 </td>
                             </tr>

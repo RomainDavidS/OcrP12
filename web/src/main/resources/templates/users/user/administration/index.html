@@ -15,7 +15,7 @@
 
 </div>
 <div layout:fragment="content" th:with="userFn = ${@userEntrepriseFunction}">
-    <th:block th:insert="~{ common/fragment/common :: mainTitle( 'Liste des utilisateurs', '/entreprise/user/add')  }"></th:block>
+    <th:block th:insert="~{ common/fragment/common :: mainTitle( 'Liste des utilisateurs', '/users/user/add')  }"></th:block>
 
     <div  >
         <div class="alert alert-info text-center" role="alert" th:if="${  userEntrepriseBeanList.size() == 0}">
@@ -49,7 +49,7 @@
 
                             <tr th:each="u : ${userEntrepriseBeanList}" >
                                 <td >
-                                    <a th:href="@{/entreprise/user/edit/{nni}(nni=${u.nni})}" th:text="${u.nni}"  ></a>
+                                    <a th:href="@{/users/user/edit/{nni}(nni=${u.nni})}" th:text="${u.nni}"  ></a>
                                 </td>
                                 <td th:text="${u.firstName + ' '+ u.lastName}" class="text-center"  > &nbsp;</td>
                                 <td th:text="${ u.role.libelle }" class="text-center"  > &nbsp;</td>

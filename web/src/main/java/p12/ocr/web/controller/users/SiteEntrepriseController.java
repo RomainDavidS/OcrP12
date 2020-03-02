@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/entreprise/site")
+@RequestMapping("/users/site")
 public class SiteEntrepriseController {
     @Autowired
     private ISiteEntrepriseService siteEntrepriseService;
@@ -60,12 +60,12 @@ public class SiteEntrepriseController {
     @GetMapping("/administration")
     public String list(Model model){
 
-        return "entreprise/site/administration/index";
+        return "users/site/administration/index";
 
     }
 
     @GetMapping("/add")
-    public String add(Model model){return "entreprise/site/administration/add"; }
+    public String add(Model model){return "users/site/administration/add"; }
 
     @PostMapping("/save")
     public String save(@ModelAttribute  @Valid SiteEntrepriseBean siteEntrepriseBean, BindingResult result, Model model){
@@ -73,11 +73,11 @@ public class SiteEntrepriseController {
         result =  resultController( result, siteEntrepriseBean) ;
 
         if (result.hasErrors())
-            return "entreprise/site/administration/add";
+            return "users/site/administration/add";
 
         siteEntrepriseService.save(siteEntrepriseBean);
 
-        return "redirect:/entreprise/site/administration?addSuccess";
+        return "redirect:/users/site/administration?addSuccess";
 
     }
 
@@ -85,10 +85,10 @@ public class SiteEntrepriseController {
     public String edit(@PathVariable Long id, Model model) {
         SiteEntrepriseBean siteEntrepriseBean = siteEntrepriseService.findById( id );
         if( siteEntrepriseBean == null)
-            return "entreprise/site/administration/add";
+            return "users/site/administration/add";
 
         model.addAttribute(siteEntrepriseBean);
-        return "entreprise/site/administration/update";
+        return "users/site/administration/update";
     }
 
     @PostMapping("/update/{id}")
@@ -97,10 +97,10 @@ public class SiteEntrepriseController {
         result =  resultController( result, siteEntrepriseBean) ;
 
         if (result.hasErrors())
-            return "entreprise/site/administration/update";
+            return "users/site/administration/update";
 
         siteEntrepriseService.update(siteEntrepriseBean);
-        return "redirect:/entreprise/site/administration?updateSuccess";
+        return "redirect:/users/site/administration?updateSuccess";
 
     }
 
