@@ -61,6 +61,7 @@
 ### Livrables
     Document exemple : Différents documents qui vont servir pour la présentation
     Jenkins : La configuration de Jenkins
+    OcrP12 : code source du projet
     SQL : Les requêtes Sql permettant de générer les bases de données ainsi que des jeux de données
     Start Microservices : Les différents Scripts Bash permettant le démarrage des différents services (bien respecter l'order de lancement)
     Fichier GitHub : url git du projet OcrP12
